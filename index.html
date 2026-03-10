@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Authentic Kashmiri suits, shawls, and pure Pashmina. Hand embroidered by master artisans in Srinagar. Direct shipping across India.">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Kashmir Weaves — Authentic Kashmiri Suits & Shawls</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧣</text></svg>">
@@ -1073,7 +1076,6 @@ padding:20px 24px;gap:16px;
 border-bottom:1px solid var(--border);
 }
 .nav-links.mobile-open{display:flex}
-.hamburger{display:flex!important}
 .filter-section,.products-section{padding-left:20px;padding-right:20px}
 .products-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
 .trust-section{grid-template-columns:1fr 1fr;padding:60px 24px}
@@ -1091,7 +1093,8 @@ border-right:1px solid var(--border);
 text-align:center;
 }
 .modal-tab:nth-child(2n){border-right:none}
-.modal-tab:nth-child(3),.modal-tab:nth-child(4){border-bottom:none}
+.modal-tab:nth-last-child(-n+2){border-bottom:none}
+.modal-tab:last-child:nth-child(odd){flex:1 1 100%;border-right:none}
 .admin-product-row{flex-wrap:wrap;gap:10px}
 .admin-product-info{flex:1 1 calc(100% - 60px)}
 .admin-btn-row{width:100%;justify-content:flex-end}
@@ -1502,7 +1505,6 @@ Order via WhatsApp
 </div>
 <p style="font-size:11px;opacity:0.3;margin-top:8px">Image 1 is the main photo shown first. Leave slots blank to use emoji.</p>
 </div>
-</div>
 <button class="submit-btn" onclick="addProduct()">Add Product to Store</button>
 </div><!-- /tab-addProduct -->
 
@@ -1537,13 +1539,6 @@ Order via WhatsApp
 </div><!-- /tab-categories -->
 
 <!-- Tab: Settings -->
- <!-- Tab: About Page Images -->
-<div class="tab-content" id="tab-aboutPage">
-  <div id="aboutImgMsg"></div>
-  <p style="font-size:12px;opacity:0.5;margin-bottom:8px">Upload photos for your About page. You can upload from your phone/computer or paste a URL from <a href="https://imgbb.com" target="_blank" rel="noopener" style="color:var(--gold-light)">imgbb.com</a>.</p>
-  <p style="font-size:11px;opacity:0.35;margin-bottom:24px">💡 Tip: Use URL links instead of uploads — they load faster and don't use storage space.</p>
-  <div id="aboutImageSlots"></div>
-</div>
 <div class="tab-content" id="tab-settings">
 <div class="form-group">
 <label>Shop Name</label>
@@ -1629,6 +1624,14 @@ function doGet(e) {
 </div>
 </div>
 </div><!-- /tab-settings -->
+
+<!-- Tab: About Page Images -->
+<div class="tab-content" id="tab-aboutPage">
+  <div id="aboutImgMsg"></div>
+  <p style="font-size:12px;opacity:0.5;margin-bottom:8px">Upload photos for your About page. You can upload from your phone/computer or paste a URL from <a href="https://imgbb.com" target="_blank" rel="noopener" style="color:var(--gold-light)">imgbb.com</a>.</p>
+  <p style="font-size:11px;opacity:0.35;margin-bottom:24px">💡 Tip: Use URL links instead of uploads — they load faster and don't use storage space.</p>
+  <div id="aboutImageSlots"></div>
+</div>
 
 </div><!-- /adminDashboard -->
 </div><!-- /modal-body -->
@@ -1744,39 +1747,21 @@ function scrollToTop() {
 // ============================================================
 
 var SETTINGS = {
-  "phone": "916006496465",
-  "shopName": "Kashmir Weaves",
-  "location": "Residency Road, Srinagar, J&K — 190001",
-  "razorpayKey": "rzp_test_YourKeyHere",
-  "adminPasswordHash": "h_g10hvh",
-  "googleSheetURL": "",
-  "sheetToken": "change-this-secret-token"
+  phone: '916006496465',
+  shopName: 'Kashmir Weaves',
+  location: 'Residency Road, Srinagar, J&K — 190001',
+  razorpayKey: 'rzp_test_YourKeyHere',
+  adminPasswordHash: simpleHash('admin123'),
+  googleSheetURL: '',
+  sheetToken: 'change-this-secret-token'
 };
 
-
 var categories = [
-  {
-    "id": "shawl",
-    "name": "Shawls",
-    "footerLabel": "Wool Shawls"
-  },
-  {
-    "id": "suit",
-    "name": "Suits",
-    "footerLabel": "Kashmiri Suits"
-  },
-  {
-    "id": "pashmina",
-    "name": "Pure Pashmina",
-    "footerLabel": "Pure Pashmina Shawls"
-  },
-  {
-    "id": "kurti",
-    "name": "Kurtis",
-    "footerLabel": "Kashmiri Kurtis"
-  }
+  { id: 'shawl',    name: 'Shawls',        footerLabel: 'Wool Shawls' },
+  { id: 'suit',     name: 'Suits',         footerLabel: 'Kashmiri Suits' },
+  { id: 'pashmina', name: 'Pure Pashmina', footerLabel: 'Pure Pashmina Shawls' },
+  { id: 'kurti',    name: 'Kurtis',        footerLabel: 'Kashmiri Kurtis' }
 ];
-
 
 var products = [
   { id:1, name:'Sozni Jaal Shawl',      category:'shawl',    price:4500,  material:'100% Pashmina',                   work:'hand',    desc:'Fine Sozni needle work. Intricate floral jaal pattern.', badge:'hot',  emoji:'🧣', images:[], soldOut:false },
@@ -1796,14 +1781,13 @@ var currentFilter = 'all';
 
 // About page image data — stores URLs or base64 for each slot
 var aboutImages = {
-  "storyMain": "https://i.ibb.co/DHRCKDQx/shawls.png",
-  "craft1": "https://i.ibb.co/PGJhVD0q/pashmina-goat.png",
-  "craft2": "https://i.ibb.co/JRpzFWWp/kani.png",
-  "craft3": "https://i.ibb.co/kssSCh59/delivery.png",
-  "artisan1": "https://i.ibb.co/KpVhLxGh/aari-work.png",
-  "artisan2": "https://i.ibb.co/pjPTZLBJ/sozni-work.png"
+  storyMain: '',
+  craft1: '',
+  craft2: '',
+  craft3: '',
+  artisan1: '',
+  artisan2: ''
 };
-
 
 // About page slot configuration — defines all 6 image slots
 var aboutSlotConfig = [
@@ -1857,7 +1841,7 @@ function loadState() {
     if (s)   SETTINGS   = { ...SETTINGS, ...JSON.parse(s) };
     if (cat) categories = JSON.parse(cat);
     if (nid) nextId     = parseInt(nid) || nextId;
-    if (ai)  aboutImages = { ...aboutImages, ...JSON.parse(ai) };
+    if (ai) aboutImages = { ...aboutImages, ...JSON.parse(ai) };
   } catch (e) {
     console.warn('Load failed, using defaults:', e);
   }
@@ -2107,7 +2091,8 @@ function updateCartUI() {
     cartFooter.style.display = 'none';
   } else {
     cartItemsEl.innerHTML = cart.map(function(item) {
-      var url = sanitiseURL(item.image);
+    var firstImg = (item.images && item.images.length > 0) ? item.images[0] : (item.image || '');
+      var url = sanitiseURL(firstImg);
       var em  = sanitise(item.emoji || '🧣');
       var pic = url
         ? '<img src="' + url + '" alt="' + sanitise(item.name) + '" style="width:70px;height:70px;object-fit:cover" data-emoji="' + em + '" onerror="handleImgError(this)">'
@@ -2434,7 +2419,13 @@ function slotPreviewUpload(fileId, dataId, thumbId, urlId) {
       if (h > max) { w = Math.round(w * max / h); h = max; }
       canvas.width = w; canvas.height = h;
       canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      var data = canvas.toDataURL('image/jpeg', 0.75);
+      var data;
+      try {
+        data = canvas.toDataURL('image/webp', 0.7);
+        if (data.length < 50) throw new Error('webp fail');
+      } catch(err) {
+        data = canvas.toDataURL('image/jpeg', 0.7);
+      }
       document.getElementById(dataId).value = data;
       var urlEl = document.getElementById(urlId);
       if (urlEl) urlEl.value = '';
@@ -2455,46 +2446,6 @@ function slotClear(urlId, dataId, thumbId) {
   if (t) t.innerHTML = '<span style="font-size:20px">📷</span>';
 }
 
-function previewImage(inputId, previewId, dataId) {
-  var fileInput = document.getElementById(inputId);
-  var file = fileInput.files[0];
-  if (!file) return;
-
-  if (file.size > 5 * 1024 * 1024) {
-    showToast('Image too large — max 5MB. Use a URL instead.');
-    fileInput.value = '';
-    return;
-  }
-
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    var img = new Image();
-    img.onload = function() {
-      var canvas = document.createElement('canvas');
-      var MAX = 800;
-      var w = img.width, h = img.height;
-      if (w > MAX || h > MAX) {
-        if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
-        else       { w = Math.round(w * MAX / h); h = MAX; }
-      }
-      canvas.width = w;
-      canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      var compressed;
-      try {
-        compressed = canvas.toDataURL('image/webp', 0.7);
-        if (compressed.length < 50) throw new Error('webp fail');
-      } catch (err) {
-        compressed = canvas.toDataURL('image/jpeg', 0.7);
-      }
-      document.getElementById(dataId).value = compressed;
-      document.getElementById(previewId).innerHTML =
-        '<img src="' + compressed + '" style="max-height:120px;max-width:100%;border-radius:6px;object-fit:cover">';
-    };
-    img.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
 
 // ============================================================
 //  SECTION 13: ADMIN — Category dropdowns
@@ -2957,6 +2908,15 @@ function toggleSheetInstructions(btn) {
 
 function exportSite() {
   var msgEl = document.getElementById('exportMsg');
+
+  // Warn if base64 images exist
+  var hasBase64 = products.some(function(p) {
+    return (p.images || []).some(function(img) { return img && img.startsWith('data:'); });
+  });
+  if (hasBase64) {
+    if (!confirm('Some products have uploaded images instead of URLs. The exported file will be very large.\n\nFor best results use imgbb.com URLs instead.\n\nContinue anyway?')) return;
+  }
+
   msgEl.innerHTML = '<div class="admin-msg" style="opacity:0.6">Preparing file...</div>';
 
   // Fetch the original clean source file
@@ -2966,7 +2926,7 @@ function exportSite() {
 
       // Inject products
       html = html.replace(
-        /var products = \[[\s\S]*?\];(\s*\/\/ About page image)/,
+        /var products = \[[\s\S]*?\];(\s*var cart)/,
         'var products = ' + JSON.stringify(products, null, 2) + ';\n$1'
       );
 
