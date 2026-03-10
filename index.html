@@ -188,6 +188,75 @@ width:100%;height:280px;object-fit:cover;
 display:flex;align-items:center;justify-content:center;
 font-size:64px;position:relative;overflow:hidden;
 }
+/* ===== IMAGE SLIDER ===== */
+.slider-wrap{position:relative;width:100%;height:100%}
+.slider-track{
+display:flex;width:100%;height:100%;
+transition:transform 0.35s ease;
+}
+.slider-slide{
+min-width:100%;height:280px;
+display:flex;align-items:center;justify-content:center;
+flex-shrink:0;overflow:hidden;
+}
+.slider-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.slider-arrow{
+position:absolute;top:50%;transform:translateY(-50%);
+background:rgba(26,16,8,0.55);border:none;color:white;
+width:32px;height:32px;cursor:pointer;z-index:4;
+display:flex;align-items:center;justify-content:center;
+font-size:14px;transition:background 0.2s;border-radius:2px;
+}
+.slider-arrow:hover{background:rgba(184,134,11,0.85)}
+.slider-arrow.prev{left:8px}
+.slider-arrow.next{right:8px}
+.slider-dots{
+position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+display:flex;gap:5px;z-index:4;
+}
+.slider-dot{
+width:6px;height:6px;border-radius:50%;
+background:rgba(255,255,255,0.5);border:none;cursor:pointer;padding:0;
+transition:background 0.2s;
+}
+.slider-dot.active{background:white}
+/* ===== IMAGE UPLOAD SLOTS ===== */
+.img-slots-wrap{display:flex;flex-direction:column;gap:10px}
+.img-slot-row{
+display:flex;align-items:center;gap:10px;
+padding:10px;border:1px solid var(--border);
+background:rgba(245,240,232,0.02);border-radius:4px;
+}
+.img-slot-num{
+font-size:10px;letter-spacing:2px;text-transform:uppercase;
+opacity:0.4;width:20px;flex-shrink:0;text-align:center;
+}
+.img-slot-thumb{
+width:48px;height:48px;border:1px solid var(--border);
+border-radius:4px;overflow:hidden;flex-shrink:0;
+display:flex;align-items:center;justify-content:center;
+font-size:20px;background:rgba(245,240,232,0.04);
+}
+.img-slot-thumb img{width:100%;height:100%;object-fit:cover}
+.img-slot-inputs{flex:1;display:flex;flex-direction:column;gap:6px}
+.img-slot-url{
+background:rgba(245,240,232,0.06);border:1px solid var(--border);
+color:var(--cream);padding:8px 10px;font-family:'Jost',sans-serif;
+font-size:12px;width:100%;outline:none;border-radius:2px;
+}
+.img-slot-url:focus{border-color:var(--gold)}
+.img-slot-actions{display:flex;gap:6px}
+.img-slot-upload-btn{
+background:none;border:1px solid var(--border);color:var(--cream);
+padding:5px 10px;font-size:10px;letter-spacing:1px;cursor:pointer;
+font-family:'Jost',sans-serif;border-radius:2px;white-space:nowrap;
+}
+.img-slot-upload-btn:hover{border-color:var(--gold);color:var(--gold-light)}
+.img-slot-clear-btn{
+background:none;border:1px solid rgba(139,58,42,0.4);color:#e07060;
+padding:5px 8px;font-size:10px;cursor:pointer;border-radius:2px;
+font-family:'Jost',sans-serif;
+}
 .product-badge-wrap{position:absolute;top:16px;left:16px;display:flex;gap:8px;z-index:2}
 .badge{font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:5px 10px}
 .badge-new{background:var(--deep);color:var(--cream)}
@@ -1063,7 +1132,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
 <p class="hero-sub">Handpicked suits and shawls. Pure Pashmina to premium wool blends. Hand and machine embroidery. Shipped pan-India.</p>
 <div class="hero-btns">
 <a href="#shop" class="btn-gold">Shop Now</a>
-<a href="#" onclick="openWhatsApp(SETTINGS.phone,'Hi! I want to enquire about your Kashmiri products');return false;" class="btn-outline">WhatsApp Us</a>
+<a href="#" onclick="openWhatsApp(SETTINGS.phone,'Hi, I came across Kashmir Weaves and would love to explore your Kashmiri collection.');return false;" class="btn-outline">WhatsApp Us</a>
 </div>
 </div>
 </section>
@@ -1317,7 +1386,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
 </div>
 
 <!-- ===== WHATSAPP FLOAT BUTTON ===== -->
-<a class="whatsapp-float" href="#" onclick="openWhatsApp(SETTINGS.phone,'Hi! I want to enquire about your Kashmiri products');return false;" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+<a class="whatsapp-float" href="#" onclick="openWhatsApp(SETTINGS.phone,'Hi, I came across Kashmir Weaves and would love to explore your Kashmiri collection.');return false;" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
 <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
@@ -1363,7 +1432,7 @@ Order via WhatsApp
 <input type="password" id="adminPassword" placeholder="Enter password" onkeydown="if(event.key==='Enter')adminLogin()">
 </div>
 <button class="submit-btn" onclick="adminLogin()">Login to Admin</button>
-<p style="font-size:11px;opacity:0.4;margin-top:16px;text-align:center">Default password: admin123</p>
+
 </div>
 </div>
 
@@ -1428,17 +1497,10 @@ Order via WhatsApp
 </div>
 </div>
 <div class="form-group">
-<label>Product Image</label>
-<div style="border:1px solid var(--border);padding:16px;background:rgba(245,240,232,0.02)">
-<p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:0.4;margin-bottom:12px">Option A — Upload from device</p>
-<div class="img-upload-box" onclick="document.getElementById('pImageFile').click()">
-<div class="img-upload-preview" id="pImagePreview"><span>📷 Click to upload image</span></div>
-<input type="file" id="pImageFile" accept="image/*" style="display:none" onchange="previewImage('pImageFile','pImagePreview','pImageData');document.getElementById('pImageUrl').value='';">
-<input type="hidden" id="pImageData">
+<label>Product Images (up to 4)</label>
+<div class="img-slots-wrap" id="addImgSlots">
 </div>
-<p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:0.4;margin:14px 0 10px">Option B — Paste image URL (e.g. from imgbb.com)</p>
-<input type="text" id="pImageUrl" placeholder="https://i.ibb.co/..." style="background:rgba(245,240,232,0.06);border:1px solid var(--border);color:var(--cream);padding:12px 14px;font-family:'Jost',sans-serif;font-size:13px;width:100%;outline:none;" oninput="if(this.value){document.getElementById('pImageData').value='';document.getElementById('pImagePreview').innerHTML='<span>📷 Click to upload image</span>';}">
-<p style="font-size:11px;opacity:0.3;margin-top:8px">URL takes priority over upload if both are filled. Leave both blank to use emoji.</p>
+<p style="font-size:11px;opacity:0.3;margin-top:8px">Image 1 is the main photo shown first. Leave slots blank to use emoji.</p>
 </div>
 </div>
 <button class="submit-btn" onclick="addProduct()">Add Product to Store</button>
@@ -1690,14 +1752,14 @@ var categories = [
 ];
 
 var products = [
-  { id:1, name:'Sozni Jaal Shawl',      category:'shawl',    price:4500,  material:'100% Pashmina',                   work:'hand',    desc:'Fine Sozni needle work. Intricate floral jaal pattern.', badge:'hot',  emoji:'🧣', image:'', soldOut:false },
-  { id:2, name:'Aari Work Suit',        category:'suit',     price:3200,  material:'Silk Cotton Blend',                work:'hand',    desc:'3-piece Kashmiri suit with dense Aari crewel embroidery.', badge:'new',  emoji:'👗', image:'', soldOut:false },
-  { id:3, name:'Pure Pashmina Wrap',    category:'pashmina', price:8500,  material:'100% Pashmina — GI Tagged',        work:'hand',    desc:'Plain weave pure Pashmina. Softest grade.',               badge:'pure', emoji:'🏔️', image:'', soldOut:false },
-  { id:4, name:'Tilla Embroidery Shawl',category:'shawl',    price:2800,  material:'Wool Blend',                       work:'machine', desc:'Gold and silver Tilla embroidery on premium wool.',       badge:'',     emoji:'✨', image:'', soldOut:false },
-  { id:5, name:'Kani Weave Shawl',      category:'pashmina', price:12000, material:'Pashmina-Silk Blend',              work:'hand',    desc:'Traditional Kani weave. Pattern woven into fabric.',      badge:'pure', emoji:'🎨', image:'', soldOut:false },
-  { id:6, name:'Casual Kashmiri Suit',  category:'suit',     price:1800,  material:'Cotton Blend',                     work:'machine', desc:'Machine embroidered daily-wear suit.',                    badge:'new',  emoji:'👘', image:'', soldOut:false },
-  { id:7, name:'Merino Wool Shawl',     category:'shawl',    price:1500,  material:'Fine Merino Wool',                 work:'machine', desc:'Budget-friendly merino wool shawl.',                      badge:'',     emoji:'🌿', image:'', soldOut:false },
-  { id:8, name:'Bridal Pashmina Set',   category:'pashmina', price:18000, material:'100% Pashmina — Hand Embroidered', work:'hand',    desc:'Full Sozni hand-embroidered Pashmina.',                   badge:'hot',  emoji:'💍', image:'', soldOut:false }
+  { id:1, name:'Sozni Jaal Shawl',      category:'shawl',    price:4500,  material:'100% Pashmina',                   work:'hand',    desc:'Fine Sozni needle work. Intricate floral jaal pattern.', badge:'hot',  emoji:'🧣', images:[], soldOut:false },
+  { id:2, name:'Aari Work Suit',        category:'suit',     price:3200,  material:'Silk Cotton Blend',                work:'hand',    desc:'3-piece Kashmiri suit with dense Aari crewel embroidery.', badge:'new',  emoji:'👗', images:[], soldOut:false },
+  { id:3, name:'Pure Pashmina Wrap',    category:'pashmina', price:8500,  material:'100% Pashmina — GI Tagged',        work:'hand',    desc:'Plain weave pure Pashmina. Softest grade.',               badge:'pure', emoji:'🏔️', images:[], soldOut:false },
+  { id:4, name:'Tilla Embroidery Shawl',category:'shawl',    price:2800,  material:'Wool Blend',                       work:'machine', desc:'Gold and silver Tilla embroidery on premium wool.',       badge:'',     emoji:'✨', images:[], soldOut:false },
+  { id:5, name:'Kani Weave Shawl',      category:'pashmina', price:12000, material:'Pashmina-Silk Blend',              work:'hand',    desc:'Traditional Kani weave. Pattern woven into fabric.',      badge:'pure', emoji:'🎨', images:[], soldOut:false },
+  { id:6, name:'Casual Kashmiri Suit',  category:'suit',     price:1800,  material:'Cotton Blend',                     work:'machine', desc:'Machine embroidered daily-wear suit.',                    badge:'new',  emoji:'👘', images:[], soldOut:false },
+  { id:7, name:'Merino Wool Shawl',     category:'shawl',    price:1500,  material:'Fine Merino Wool',                 work:'machine', desc:'Budget-friendly merino wool shawl.',                      badge:'',     emoji:'🌿', images:[], soldOut:false },
+  { id:8, name:'Bridal Pashmina Set',   category:'pashmina', price:18000, material:'100% Pashmina — Hand Embroidered', work:'hand',    desc:'Full Sozni hand-embroidered Pashmina.',                   badge:'hot',  emoji:'💍', images:[], soldOut:false }
 ];
 
 var cart = [];
@@ -1753,7 +1815,16 @@ function loadState() {
     var cat = localStorage.getItem('kw_categories');
     var nid = localStorage.getItem('kw_nextId');
     var ai  = localStorage.getItem('kw_aboutImages');
-    if (p)   products   = JSON.parse(p);
+    if (p)   {
+      products = JSON.parse(p);
+      // Migrate old single image field to images array
+      products.forEach(function(prod) {
+        if (!prod.images) {
+          prod.images = prod.image ? [prod.image] : [];
+        }
+        delete prod.image;
+      });
+    }
     if (c)   cart       = JSON.parse(c);
     if (s)   SETTINGS   = { ...SETTINGS, ...JSON.parse(s) };
     if (cat) categories = JSON.parse(cat);
@@ -1850,13 +1921,15 @@ function renderProducts(filter) {
   }
 
   grid.innerHTML = filtered.map(function(p) {
-    var url       = sanitiseURL(p.image);
+    // Support both old single image and new images array
+    var imgs = (p.images && p.images.length > 0) ? p.images : (p.image ? [p.image] : []);
     var em        = sanitise(p.emoji || '🧣');
     var nm        = sanitise(p.name);
     var mat       = sanitise(p.material);
     var desc      = sanitise(p.desc || '');
     var catLabel  = sanitise(getCategoryLabel(p.category));
     var workLabel = (p.work || '').indexOf('hand') >= 0 ? 'Hand Work' : 'Machine Work';
+    var pid       = p.id;
 
     var badgeHTML = '';
     if (p.soldOut) {
@@ -1866,20 +1939,47 @@ function renderProducts(filter) {
       badgeHTML = '<span class="badge badge-' + sanitise(p.badge) + '">' + bText + '</span>';
     }
 
-    var imgHTML = url
-      ? '<img src="' + url + '" alt="' + nm + '" loading="lazy" style="width:100%;height:100%;object-fit:cover" data-emoji="' + em + '" onerror="handleImgError(this)">'
-      : '<span style="font-size:72px">' + em + '</span>';
-
     var overlay = p.soldOut
       ? '<div class="soldout-overlay"><div class="soldout-label">Sold Out</div></div>' : '';
 
     var cartBtn = p.soldOut
       ? '<button class="add-cart-btn" disabled>Sold Out</button>'
-      : '<button class="add-cart-btn" onclick="addToCart(' + p.id + ')">Add to Cart</button>';
+      : '<button class="add-cart-btn" onclick="addToCart(' + pid + ')">Add to Cart</button>';
+
+    var innerHTML;
+    if (imgs.length === 0) {
+      // No images — show emoji
+      innerHTML = '<span style="font-size:72px">' + em + '</span>';
+    } else if (imgs.length === 1) {
+      // Single image — no slider needed
+      var u = sanitiseURL(imgs[0]);
+      innerHTML = u
+        ? '<img src="' + u + '" alt="' + nm + '" loading="lazy" style="width:100%;height:100%;object-fit:cover" data-emoji="' + em + '" onerror="handleImgError(this)">'
+        : '<span style="font-size:72px">' + em + '</span>';
+    } else {
+      // Multiple images — build slider
+      var slides = imgs.map(function(img) {
+        var u = sanitiseURL(img);
+        return '<div class="slider-slide">' +
+          (u ? '<img src="' + u + '" alt="' + nm + '" loading="lazy" data-emoji="' + em + '" onerror="handleImgError(this)">'
+             : '<span style="font-size:72px">' + em + '</span>') +
+        '</div>';
+      }).join('');
+      var dots = imgs.map(function(_, i) {
+        return '<button class="slider-dot' + (i === 0 ? ' active' : '') + '" onclick="sliderGoto(' + pid + ',' + i + ')"></button>';
+      }).join('');
+      innerHTML =
+        '<div class="slider-wrap" id="slider-' + pid + '">' +
+          '<div class="slider-track" id="strack-' + pid + '">' + slides + '</div>' +
+          '<button class="slider-arrow prev" onclick="sliderPrev(' + pid + ',' + imgs.length + ')">&#8249;</button>' +
+          '<button class="slider-arrow next" onclick="sliderNext(' + pid + ',' + imgs.length + ')">&#8250;</button>' +
+          '<div class="slider-dots" id="sdots-' + pid + '">' + dots + '</div>' +
+        '</div>';
+    }
 
     return '<div class="product-card reveal' + (p.soldOut ? ' soldout' : '') + '">' +
       '<div class="product-img" style="background:' + getBg(p.category) + '">' +
-        imgHTML +
+        innerHTML +
         '<div class="product-badge-wrap">' + badgeHTML + '</div>' +
         overlay +
       '</div>' +
@@ -1899,6 +1999,34 @@ function renderProducts(filter) {
   setTimeout(function() {
     document.querySelectorAll('.product-card.reveal').forEach(function(el) { el.classList.add('visible'); });
   }, 100);
+}
+
+// Slider state — tracks current index per product id
+var sliderIndex = {};
+
+function sliderNext(pid, total) {
+  sliderIndex[pid] = ((sliderIndex[pid] || 0) + 1) % total;
+  sliderApply(pid);
+}
+function sliderPrev(pid, total) {
+  sliderIndex[pid] = ((sliderIndex[pid] || 0) - 1 + total) % total;
+  sliderApply(pid);
+}
+function sliderGoto(pid, idx) {
+  sliderIndex[pid] = idx;
+  sliderApply(pid);
+}
+function sliderApply(pid) {
+  var track = document.getElementById('strack-' + pid);
+  var dots  = document.getElementById('sdots-' + pid);
+  if (!track) return;
+  var idx = sliderIndex[pid] || 0;
+  track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+  if (dots) {
+    dots.querySelectorAll('.slider-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === idx);
+    });
+  }
 }
 
 // ============================================================
@@ -2109,14 +2237,7 @@ function payRazorpay() {
   var total = getCartTotal();
 
   if (!SETTINGS.razorpayKey || SETTINGS.razorpayKey.indexOf('YourKey') >= 0) {
-    alert(
-      'Razorpay key not configured yet.\n\n' +
-      '1. Go to razorpay.com\n' +
-      '2. Create a free account\n' +
-      '3. Get your Key ID\n' +
-      '4. Paste it in Admin > Settings\n\n' +
-      'For now, please use WhatsApp order.'
-    );
+    alert('Online payment is not available yet.\nPlease use the WhatsApp order button.');
     return;
   }
 
@@ -2223,6 +2344,7 @@ function showDashboard() {
   document.getElementById('adminLoginSection').style.display = 'none';
   document.getElementById('adminDashboard').style.display = 'block';
   populateCategoryDropdowns();
+  initAddImgSlots();
   loadAdminProducts();
   loadAdminCategories();
   loadSettingsForm();
@@ -2236,13 +2358,74 @@ function switchTab(tabId, btn) {
   btn.classList.add('active');
   if (tabId === 'manageProducts') loadAdminProducts();
   if (tabId === 'categories')     loadAdminCategories();
-  if (tabId === 'addProduct')     populateCategoryDropdowns();
+  if (tabId === 'addProduct') { populateCategoryDropdowns(); initAddImgSlots(); }
   if (tabId === 'aboutPage')      loadAboutImagesAdmin();
 }
 
 // ============================================================
 //  SECTION 12: ADMIN — Image upload with compression
 // ============================================================
+
+// Build 4 image slots for Add Product tab
+function initAddImgSlots() {
+  var wrap = document.getElementById('addImgSlots');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  for (var si = 1; si <= 4; si++) {
+    var row = document.createElement('div');
+    row.className = 'img-slot-row';
+    row.innerHTML =
+      '<div class="img-slot-num">' + si + '</div>' +
+      '<div class="img-slot-thumb" id="pImgThumb-' + si + '"><span style="font-size:20px">📷</span></div>' +
+      '<div class="img-slot-inputs">' +
+        '<input class="img-slot-url" type="text" id="pImgUrl-' + si + '" placeholder="https://i.ibb.co/...">' +
+        '<input type="hidden" id="pImgData-' + si + '">' +
+        '<div class="img-slot-actions">' +
+          '<button class="img-slot-upload-btn" onclick="document.getElementById(\'pImgFile-' + si + '\').click()">📷 Upload</button>' +
+          '<input type="file" id="pImgFile-' + si + '" accept="image/*" style="display:none"' +
+            ' onchange="slotPreviewUpload(\'pImgFile-' + si + '\',\'pImgData-' + si + '\',\'pImgThumb-' + si + '\',\'pImgUrl-' + si + '\')">' +
+          '<button class="img-slot-clear-btn" onclick="slotClear(\'pImgUrl-' + si + '\',\'pImgData-' + si + '\',\'pImgThumb-' + si + '\')">✕</button>' +
+        '</div>' +
+      '</div>';
+    wrap.appendChild(row);
+  }
+}
+
+function slotPreviewUpload(fileId, dataId, thumbId, urlId) {
+  var file = document.getElementById(fileId).files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) { showToast('Image too large — max 5MB'); return; }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = new Image();
+    img.onload = function() {
+      var canvas = document.createElement('canvas');
+      var max = 800;
+      var w = img.width, h = img.height;
+      if (w > max) { h = Math.round(h * max / w); w = max; }
+      if (h > max) { w = Math.round(w * max / h); h = max; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      var data = canvas.toDataURL('image/jpeg', 0.75);
+      document.getElementById(dataId).value = data;
+      var urlEl = document.getElementById(urlId);
+      if (urlEl) urlEl.value = '';
+      var thumb = document.getElementById(thumbId);
+      if (thumb) thumb.innerHTML = '<img src="' + data + '" style="width:100%;height:100%;object-fit:cover">';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function slotClear(urlId, dataId, thumbId) {
+  var u = document.getElementById(urlId);
+  var d = document.getElementById(dataId);
+  var t = document.getElementById(thumbId);
+  if (u) u.value = '';
+  if (d) d.value = '';
+  if (t) t.innerHTML = '<span style="font-size:20px">📷</span>';
+}
 
 function previewImage(inputId, previewId, dataId) {
   var fileInput = document.getElementById(inputId);
@@ -2316,9 +2499,13 @@ function addProduct() {
   var desc     = document.getElementById('pDesc').value.trim();
   var badge    = document.getElementById('pBadge').value;
   var emoji    = document.getElementById('pEmoji').value.trim() || '🧣';
-  var urlInput = document.getElementById('pImageUrl').value.trim();
-  var upData   = document.getElementById('pImageData').value;
-  var image    = urlInput || upData;
+  var images   = [];
+  for (var si = 1; si <= 4; si++) {
+    var urlEl  = document.getElementById('pImgUrl-' + si);
+    var dataEl = document.getElementById('pImgData-' + si);
+    var val    = (urlEl ? urlEl.value.trim() : '') || (dataEl ? dataEl.value : '');
+    if (val) images.push(val);
+  }
 
   if (!name || !price || price <= 0 || !material) {
     document.getElementById('addProductMsg').innerHTML =
@@ -2329,17 +2516,24 @@ function addProduct() {
   products.push({
     id: nextId++, name: name, category: category, price: price,
     material: material, work: work, desc: desc, badge: badge,
-    emoji: emoji, image: image, soldOut: false
+    emoji: emoji, images: images, soldOut: false
   });
 
   renderProducts(currentFilter);
   renderFilterBar();
   saveState();
 
-  ['pName','pPrice','pMaterial','pDesc','pEmoji','pImageData','pImageUrl'].forEach(function(id) {
+  ['pName','pPrice','pMaterial','pDesc','pEmoji'].forEach(function(id) {
     document.getElementById(id).value = '';
   });
-  document.getElementById('pImagePreview').innerHTML = '<span>📷 Click to upload image</span>';
+  for (var si = 1; si <= 4; si++) {
+    var urlEl  = document.getElementById('pImgUrl-' + si);
+    var dataEl = document.getElementById('pImgData-' + si);
+    var thumbEl= document.getElementById('pImgThumb-' + si);
+    if (urlEl)   urlEl.value   = '';
+    if (dataEl)  dataEl.value  = '';
+    if (thumbEl) thumbEl.innerHTML = '<span style="font-size:20px">📷</span>';
+  }
   document.getElementById('pBadge').value = '';
 
   document.getElementById('addProductMsg').innerHTML =
@@ -2359,26 +2553,48 @@ function loadAdminProducts() {
   }
 
   list.innerHTML = products.map(function(p) {
-    var url    = sanitiseURL(p.image);
+    var imgs   = (p.images && p.images.length > 0) ? p.images : (p.image ? [p.image] : []);
     var em     = sanitise(p.emoji || '🧣');
     var nm     = sanitise(p.name);
     var mat    = sanitise(p.material);
     var dsc    = sanitise(p.desc || '');
-    var isURL  = p.image && (p.image.startsWith('http://') || p.image.startsWith('https://'));
-    var isData = p.image && p.image.startsWith('data:');
 
-    var thumb = url
-      ? '<img src="' + url + '" style="width:40px;height:40px;object-fit:cover;border-radius:6px" data-emoji="' + em + '" onerror="handleImgError(this)">'
+    var firstImg = imgs.length > 0 ? sanitiseURL(imgs[0]) : '';
+    var thumb = firstImg
+      ? '<img src="' + firstImg + '" style="width:40px;height:40px;object-fit:cover;border-radius:6px" data-emoji="' + em + '" onerror="handleImgError(this)">'
       : em;
-
-    var editPreview = isData
-      ? '<img src="' + p.image + '" style="max-height:100px;max-width:100%;border-radius:6px;object-fit:cover">'
-      : '<span>📷 Click to upload new image</span>';
 
     var catOpts = categories.map(function(c) {
       return '<option value="' + sanitise(c.id) + '"' +
         (p.category === c.id ? ' selected' : '') + '>' + sanitise(c.name) + '</option>';
     }).join('');
+
+    // Build 4 image slots for edit form
+    var imgSlots = '';
+    for (var si = 1; si <= 4; si++) {
+      var existingVal = imgs[si - 1] || '';
+      var isData = existingVal.startsWith('data:');
+      var isURL  = existingVal.startsWith('http://') || existingVal.startsWith('https://');
+      var thumbHTML = existingVal
+        ? (isData || isURL ? '<img src="' + sanitiseURL(existingVal) + '" style="width:100%;height:100%;object-fit:cover">' : '<span style="font-size:20px">📷</span>')
+        : '<span style="font-size:20px">📷</span>';
+      imgSlots +=
+        '<div class="img-slot-row">' +
+          '<div class="img-slot-num">' + si + '</div>' +
+          '<div class="img-slot-thumb" id="e-imgthumb-' + p.id + '-' + si + '">' + thumbHTML + '</div>' +
+          '<div class="img-slot-inputs">' +
+            '<input class="img-slot-url" type="text" id="e-imgurl-' + p.id + '-' + si + '" value="' + (isURL ? sanitise(existingVal) : '') + '" placeholder="https://i.ibb.co/..."' +
+              ' oninput="if(this.value){var d=document.getElementById(\'e-imgdata-' + p.id + '-' + si + '\');if(d)d.value=\'\';}">' +
+            '<input type="hidden" id="e-imgdata-' + p.id + '-' + si + '" value="' + (isData ? sanitise(existingVal) : '') + '">' +
+            '<div class="img-slot-actions">' +
+              '<button class="img-slot-upload-btn" onclick="document.getElementById(\'e-imgfile-' + p.id + '-' + si + '\').click()">📷 Upload</button>' +
+              '<input type="file" id="e-imgfile-' + p.id + '-' + si + '" accept="image/*" style="display:none"' +
+                ' onchange="slotPreviewUpload(\'e-imgfile-' + p.id + '-' + si + '\',\'e-imgdata-' + p.id + '-' + si + '\',\'e-imgthumb-' + p.id + '-' + si + '\',\'e-imgurl-' + p.id + '-' + si + '\')">' +
+              '<button class="img-slot-clear-btn" onclick="slotClear(\'e-imgurl-' + p.id + '-' + si + '\',\'e-imgdata-' + p.id + '-' + si + '\',\'e-imgthumb-' + p.id + '-' + si + '\')">✕</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
 
     return '<div class="admin-product-item" id="ap-' + p.id + '">' +
       '<div class="admin-product-row">' +
@@ -2434,21 +2650,9 @@ function loadAdminProducts() {
             '<input type="text" id="e-emoji-' + p.id + '" value="' + em + '" maxlength="4">' +
           '</div>' +
         '</div>' +
-        '<div class="form-group"><label>Product Image</label>' +
-          '<div style="border:1px solid var(--border);padding:14px;background:rgba(245,240,232,0.02)">' +
-            '<p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:0.4;margin-bottom:10px">Upload from device</p>' +
-            '<div class="img-upload-box" onclick="document.getElementById(\'e-imgfile-' + p.id + '\').click()">' +
-              '<div class="img-upload-preview" id="e-imgpreview-' + p.id + '">' + editPreview + '</div>' +
-              '<input type="file" id="e-imgfile-' + p.id + '" accept="image/*" style="display:none" ' +
-                'onchange="previewImage(\'e-imgfile-' + p.id + '\',\'e-imgpreview-' + p.id + '\',\'e-imgdata-' + p.id + '\');document.getElementById(\'e-imgurl-' + p.id + '\').value=\'\';">' +
-              '<input type="hidden" id="e-imgdata-' + p.id + '" value="' + (isData ? sanitise(p.image) : '') + '">' +
-            '</div>' +
-            '<p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:0.4;margin:12px 0 8px">Or paste image URL</p>' +
-            '<input type="text" id="e-imgurl-' + p.id + '" value="' + (isURL ? sanitise(p.image) : '') + '" ' +
-              'placeholder="https://i.ibb.co/..." ' +
-              'style="background:rgba(245,240,232,0.06);border:1px solid var(--border);color:var(--cream);padding:10px 12px;font-family:Jost,sans-serif;font-size:13px;width:100%;outline:none" ' +
-              'oninput="if(this.value){document.getElementById(\'e-imgdata-' + p.id + '\').value=\'\';document.getElementById(\'e-imgpreview-' + p.id + '\').innerHTML=\'<span>📷 Click to upload</span>\';}">' +
-          '</div>' +
+        '<div class="form-group"><label>Product Images (up to 4)</label>' +
+          '<div class="img-slots-wrap">' + imgSlots + '</div>' +
+          '<p style="font-size:11px;opacity:0.3;margin-top:8px">Image 1 is main. Leave blank to use emoji.</p>' +
         '</div>' +
         '<div class="edit-action-row">' +
           '<button class="edit-save-btn" onclick="saveProductEdit(' + p.id + ')">Save Changes</button>' +
@@ -2493,9 +2697,13 @@ function saveProductEdit(id) {
   var desc     = document.getElementById('e-desc-' + id).value.trim();
   var badge    = document.getElementById('e-badge-' + id).value;
   var emoji    = document.getElementById('e-emoji-' + id).value.trim() || '🧣';
-  var urlInput = document.getElementById('e-imgurl-' + id).value.trim();
-  var upData   = document.getElementById('e-imgdata-' + id).value;
-  var image    = urlInput || upData;
+  var images   = [];
+  for (var si = 1; si <= 4; si++) {
+    var urlEl  = document.getElementById('e-imgurl-'  + id + '-' + si);
+    var dataEl = document.getElementById('e-imgdata-' + id + '-' + si);
+    var val    = (urlEl ? urlEl.value.trim() : '') || (dataEl ? dataEl.value : '');
+    if (val) images.push(val);
+  }
 
   if (!name || !price || price <= 0 || !material) {
     showToast('Name, valid Price, and Material are required');
@@ -2504,7 +2712,8 @@ function saveProductEdit(id) {
 
   p.name = name; p.price = price; p.category = category;
   p.work = work; p.material = material; p.desc = desc;
-  p.badge = badge; p.emoji = emoji; p.image = image;
+  p.badge = badge; p.emoji = emoji; p.images = images;
+  delete p.image; // remove legacy field
 
   renderProducts(currentFilter);
   renderFilterBar();
