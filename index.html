@@ -1744,21 +1744,39 @@ function scrollToTop() {
 // ============================================================
 
 var SETTINGS = {
-  phone: '916006496465',
-  shopName: 'Kashmir Weaves',
-  location: 'Residency Road, Srinagar, J&K — 190001',
-  razorpayKey: 'rzp_test_YourKeyHere',
-  adminPasswordHash: simpleHash('admin123'),
-  googleSheetURL: '',
-  sheetToken: 'change-this-secret-token'
+  "phone": "916006496465",
+  "shopName": "Kashmir Weaves",
+  "location": "Residency Road, Srinagar, J&K — 190001",
+  "razorpayKey": "rzp_test_YourKeyHere",
+  "adminPasswordHash": "h_g10hvh",
+  "googleSheetURL": "",
+  "sheetToken": "change-this-secret-token"
 };
 
+
 var categories = [
-  { id: 'shawl',    name: 'Shawls',        footerLabel: 'Wool Shawls' },
-  { id: 'suit',     name: 'Suits',         footerLabel: 'Kashmiri Suits' },
-  { id: 'pashmina', name: 'Pure Pashmina', footerLabel: 'Pure Pashmina Shawls' },
-  { id: 'kurti',    name: 'Kurtis',        footerLabel: 'Kashmiri Kurtis' }
+  {
+    "id": "shawl",
+    "name": "Shawls",
+    "footerLabel": "Wool Shawls"
+  },
+  {
+    "id": "suit",
+    "name": "Suits",
+    "footerLabel": "Kashmiri Suits"
+  },
+  {
+    "id": "pashmina",
+    "name": "Pure Pashmina",
+    "footerLabel": "Pure Pashmina Shawls"
+  },
+  {
+    "id": "kurti",
+    "name": "Kurtis",
+    "footerLabel": "Kashmiri Kurtis"
+  }
 ];
+
 
 var products = [
   { id:1, name:'Sozni Jaal Shawl',      category:'shawl',    price:4500,  material:'100% Pashmina',                   work:'hand',    desc:'Fine Sozni needle work. Intricate floral jaal pattern.', badge:'hot',  emoji:'🧣', images:[], soldOut:false },
@@ -1778,13 +1796,14 @@ var currentFilter = 'all';
 
 // About page image data — stores URLs or base64 for each slot
 var aboutImages = {
-  storyMain: '',
-  craft1: '',
-  craft2: '',
-  craft3: '',
-  artisan1: '',
-  artisan2: ''
+  "storyMain": "https://i.ibb.co/DHRCKDQx/shawls.png",
+  "craft1": "https://i.ibb.co/PGJhVD0q/pashmina-goat.png",
+  "craft2": "https://i.ibb.co/JRpzFWWp/kani.png",
+  "craft3": "https://i.ibb.co/kssSCh59/delivery.png",
+  "artisan1": "https://i.ibb.co/KpVhLxGh/aari-work.png",
+  "artisan2": "https://i.ibb.co/pjPTZLBJ/sozni-work.png"
 };
+
 
 // About page slot configuration — defines all 6 image slots
 var aboutSlotConfig = [
