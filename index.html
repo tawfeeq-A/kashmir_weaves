@@ -1053,7 +1053,93 @@ border-radius:4px;font-size:11px;cursor:pointer;font-family:'Jost',sans-serif;
     padding-right:40px;
   }
 }
-/* ===== ANIMATIONS ===== */
+/* ===== COLLECTIONS GRID ===== */
+.collections-section{
+background:var(--warm-white);padding:80px 60px 100px;color:var(--deep);
+}
+.collections-header{text-align:center;margin-bottom:60px}
+.collections-tag{font-size:10px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.collections-title{
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(34px,5vw,58px);font-weight:300;line-height:1.1;color:var(--deep);
+}
+.collections-title em{font-style:italic;color:var(--rust)}
+.cat-grid{
+display:grid;
+grid-template-columns:1.4fr 1fr 1fr;
+grid-template-rows:auto auto;
+gap:3px;
+max-width:1200px;margin:0 auto;
+}
+.cat-card{position:relative;overflow:hidden;cursor:pointer}
+.cat-card:first-child{grid-row:1/3}
+.cat-bg{
+width:100%;height:100%;min-height:280px;
+display:flex;align-items:flex-end;
+padding:32px;position:relative;
+transition:transform 0.55s ease;
+}
+.cat-card:first-child .cat-bg{min-height:580px}
+.cat-card:hover .cat-bg{transform:scale(1.04)}
+.cat-bg::before{
+content:'';position:absolute;inset:0;
+background-image:radial-gradient(circle at 30% 70%,rgba(184,134,11,0.18) 0%,transparent 55%);
+pointer-events:none;
+}
+.bg-pashmina{background:linear-gradient(160deg,#2d1f0e 0%,#4a2c1a 40%,#6b3d20 70%,#3d2010 100%)}
+.bg-suits{background:linear-gradient(135deg,#1a2a1a 0%,#2d4a2d 50%,#1a3a2a 100%)}
+.bg-shawls{background:linear-gradient(135deg,#2a1a2a 0%,#4a2a4a 50%,#3a1a3a 100%)}
+.bg-kurti{background:linear-gradient(135deg,#2a1a10 0%,#4a3010 50%,#3a2010 100%)}
+.cat-info{position:relative;z-index:2}
+.cat-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.cat-name{
+font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;
+color:var(--cream);margin-bottom:10px;
+}
+.cat-card:first-child .cat-name{font-size:38px}
+.cat-desc{font-size:12px;color:rgba(245,240,232,0.6);line-height:1.6;max-width:280px;margin-bottom:18px}
+.cat-link{
+font-size:10px;letter-spacing:3px;text-transform:uppercase;
+color:var(--gold-light);text-decoration:none;
+display:inline-flex;align-items:center;gap:8px;
+transition:gap 0.3s;
+}
+.cat-link:hover{gap:16px}
+.cat-link::after{content:'→'}
+
+/* ===== EMBROIDERY TYPES ===== */
+.embroidery-section{
+background:var(--warm-white);
+padding:0 60px 100px;
+color:var(--deep);
+}
+.embroidery-grid{
+display:grid;grid-template-columns:repeat(3,1fr);
+gap:3px;max-width:1200px;margin:0 auto;
+}
+.emb-card{
+padding:44px 36px;background:white;
+border-bottom:3px solid transparent;
+transition:border-color 0.3s,transform 0.3s;
+}
+.emb-card:hover{border-color:var(--gold);transform:translateY(-4px)}
+.emb-num{
+font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;
+color:rgba(184,134,11,0.13);line-height:1;margin-bottom:20px;
+}
+.emb-name{
+font-family:'Cormorant Garamond',serif;font-size:24px;
+font-weight:400;color:var(--deep);margin-bottom:10px;
+}
+.emb-desc{font-size:13px;line-height:1.7;opacity:0.6}
+@media(max-width:768px){
+.collections-section{padding:60px 20px 80px}
+.cat-grid{grid-template-columns:1fr}
+.cat-card:first-child{grid-row:auto}
+.cat-card:first-child .cat-bg{min-height:360px}
+.embroidery-section{padding:0 20px 80px}
+.embroidery-grid{grid-template-columns:1fr}
+}
 @keyframes fadeUp{
 from{opacity:0;transform:translateY(30px)}
 to{opacity:1;transform:translateY(0)}
@@ -1135,7 +1221,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
 <p class="hero-sub">Handpicked suits and shawls. Pure Pashmina to premium wool blends. Hand and machine embroidery. Shipped pan-India.</p>
 <div class="hero-btns">
 <a href="#shop" class="btn-gold">Shop Now</a>
-<a href="#" onclick="openWhatsApp(SETTINGS.phone,'Hi, I came across Kashmir Weaves and would love to explore your Kashmiri collection.');return false;" class="btn-outline">WhatsApp Us</a>
+<a href="#" onclick="openWhatsApp(SETTINGS.phone, SETTINGS.whatsappGreeting);return false;" class="btn-outline">WhatsApp Us</a>
 </div>
 </div>
 </section>
@@ -1148,22 +1234,85 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
 <span class="marquee-item">Kashmiri Suits</span><span class="marquee-dot">◆</span>
 <span class="marquee-item">Sozni Work</span><span class="marquee-dot">◆</span>
 <span class="marquee-item">Aari Work</span><span class="marquee-dot">◆</span>
-<span class="marquee-item">Free Shipping Above ₹2000</span><span class="marquee-dot">◆</span>
+<span class="marquee-item" id="marqueeShipping1">Free Shipping Above ₹2000</span><span class="marquee-dot">◆</span>
 <span class="marquee-item">Pan-India Delivery</span><span class="marquee-dot">◆</span>
 <span class="marquee-item">Pure Pashmina</span><span class="marquee-dot">◆</span>
 <span class="marquee-item">Hand Embroidery</span><span class="marquee-dot">◆</span>
 <span class="marquee-item">Kashmiri Suits</span><span class="marquee-dot">◆</span>
 <span class="marquee-item">Sozni Work</span><span class="marquee-dot">◆</span>
 <span class="marquee-item">Aari Work</span><span class="marquee-dot">◆</span>
-<span class="marquee-item">Free Shipping Above ₹2000</span><span class="marquee-dot">◆</span>
+<span class="marquee-item" id="marqueeShipping2">Free Shipping Above ₹2000</span><span class="marquee-dot">◆</span>
 <span class="marquee-item">Pan-India Delivery</span><span class="marquee-dot">◆</span>
 </div>
 </div>
 
-<!-- ===== SHOP SECTION ===== -->
-<section id="shop">
+<!-- ===== SHOP CLOSED BANNER (hidden by default) ===== -->
+<div id="shopClosedBanner" style="display:none;background:var(--rust);padding:14px 24px;text-align:center;">
+  <span style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:white">
+    🛑 Shop temporarily closed — <a href="#" onclick="openWhatsApp(SETTINGS.phone, SETTINGS.whatsappGreeting);return false;" style="color:var(--gold-light);text-decoration:underline">WhatsApp us to order</a>
+  </span>
+</div>
+
+<!-- ===== COLLECTIONS GRID (above shop) ===== -->
+<section class="collections-section" id="shop">
+  <div class="collections-header reveal">
+    <div class="collections-tag">Our Collections</div>
+    <h2 class="collections-title">Every Piece Tells a<br><em>Kashmir Story</em></h2>
+  </div>
+  <div class="cat-grid reveal">
+    <div class="cat-card">
+      <div class="cat-bg bg-pashmina">
+        <div class="cat-info">
+          <div class="cat-label">Finest Collection</div>
+          <div class="cat-name">Pure Pashmina<br>Shawls</div>
+          <div class="cat-desc">Sourced from Changthangi goats of Ladakh. Available in 100%, 70/30, and 50/50 blends with hand and machine embroidery.</div>
+          <a href="#products" class="cat-link" onclick="footerFilter('pashmina')">View Collection</a>
+        </div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-bg bg-suits">
+        <div class="cat-info">
+          <div class="cat-label">Traditional Wear</div>
+          <div class="cat-name">Kashmiri Suits</div>
+          <a href="#products" class="cat-link" onclick="footerFilter('suit')">Explore</a>
+        </div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-bg bg-shawls">
+        <div class="cat-info">
+          <div class="cat-label">Premium Range</div>
+          <div class="cat-name">Wool & Silk Shawls</div>
+          <a href="#products" class="cat-link" onclick="footerFilter('shawl')">Explore</a>
+        </div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-bg bg-kurti">
+        <div class="cat-info">
+          <div class="cat-label">Everyday Elegance</div>
+          <div class="cat-name">Kashmiri Kurtis</div>
+          <a href="#products" class="cat-link" onclick="footerFilter('kurti')">Explore</a>
+        </div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-bg" style="background:linear-gradient(135deg,#1a1a2a 0%,#2a2a4a 50%,#1a1a3a 100%)">
+        <div class="cat-info">
+          <div class="cat-label">Custom Work</div>
+          <div class="cat-name">Bulk & Custom<br>Orders</div>
+          <a href="#" class="cat-link" onclick="openWhatsApp(SETTINGS.phone,'Hi, I am interested in a bulk or custom order from Kashmir Weaves. Please share details.');return false;">Enquire on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SHOP / PRODUCTS ===== -->
+<section id="products">
 <div class="filter-section reveal">
-<h2>Our <em>Collections</em></h2>
+<h2>Browse <em>Products</em></h2>
 <div class="filter-bar" id="filterBar">
 <button class="filter-btn active" onclick="filterProducts('all',this)">All Products</button>
 </div>
@@ -1173,7 +1322,46 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
 </div>
 </section>
 
-<!-- ===== TRUST / ABOUT SECTION ===== -->
+<!-- ===== EMBROIDERY TYPES ===== -->
+<section class="embroidery-section">
+  <div class="collections-header reveal" style="padding-top:80px">
+    <div class="collections-tag">Embroidery Types</div>
+    <h2 class="collections-title" style="color:var(--deep)">Hand Work &amp; <em>Machine Work</em></h2>
+  </div>
+  <div class="embroidery-grid reveal">
+    <div class="emb-card">
+      <div class="emb-num">01</div>
+      <div class="emb-name">Sozni Embroidery</div>
+      <div class="emb-desc">Fine needle work done entirely by hand. Intricate floral and paisley patterns. Takes 3–18 months per shawl. Highest value category.</div>
+    </div>
+    <div class="emb-card">
+      <div class="emb-num">02</div>
+      <div class="emb-name">Aari (Crewel) Work</div>
+      <div class="emb-desc">Hook-needle embroidery with thick woollen threads. Dense, colourful patterns. Used on suits and shawls both.</div>
+    </div>
+    <div class="emb-card">
+      <div class="emb-num">03</div>
+      <div class="emb-name">Tilla (Zari) Work</div>
+      <div class="emb-desc">Gold and silver metallic thread embroidery. Used for bridal and festive pieces. Machine-assisted options available at lower price points.</div>
+    </div>
+    <div class="emb-card">
+      <div class="emb-num">04</div>
+      <div class="emb-name">Kani Weave</div>
+      <div class="emb-desc">Pattern woven directly into the shawl during weaving. No embroidery added after. The oldest Kashmiri weaving tradition.</div>
+    </div>
+    <div class="emb-card">
+      <div class="emb-num">05</div>
+      <div class="emb-name">Machine Embroidery</div>
+      <div class="emb-desc">Computer-aided patterns on shawls and suits. Faster production, affordable pricing. Ideal for bulk orders and gifting.</div>
+    </div>
+    <div class="emb-card">
+      <div class="emb-num">06</div>
+      <div class="emb-name">Block / Papier-Mâché Print</div>
+      <div class="emb-desc">Traditional block printing on suit fabric. Unique patterns inspired by Kashmiri papier-mâché art, not found in machine-made textiles.</div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== ABOUT / OUR STORY SECTION ===== -->
 <section id="about">
 
@@ -1274,7 +1462,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
         <h3>Delivered with Love</h3>
         <p>
           Every piece is hand-inspected, carefully folded, and packed in premium packaging. 
-          Shipped within 3 days with tracking. Delivered across India — 
+          Shipped within <span id="deliveryDaysText">3–5</span> days with tracking. Delivered across India — 
           from our hands to yours.
         </p>
       </div>
@@ -1357,7 +1545,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
       <div class="promise-card">
         <div class="promise-icon">🚚</div>
         <h3>Pan-India Delivery</h3>
-        <p>Shipped within 3 days. Tracked delivery. Free shipping on orders above ₹2,000.</p>
+        <p>Shipped within <span id="deliveryDaysText2">3–5</span> days. Tracked delivery. Free shipping on orders above ₹<span id="promiseFreeShipping">2,000</span>.</p>
       </div>
       <div class="promise-card">
         <div class="promise-icon">💬</div>
@@ -1389,7 +1577,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
 </div>
 
 <!-- ===== WHATSAPP FLOAT BUTTON ===== -->
-<a class="whatsapp-float" href="#" onclick="openWhatsApp(SETTINGS.phone,'Hi, I came across Kashmir Weaves and would love to explore your Kashmiri collection.');return false;" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+<a class="whatsapp-float" href="#" onclick="openWhatsApp(SETTINGS.phone, SETTINGS.whatsappGreeting);return false;" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
 <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
@@ -1573,6 +1761,35 @@ Order via WhatsApp
 <label>Change Admin Password</label>
 <input type="password" id="settingPassword" placeholder="New password">
 </div>
+
+<div style="margin-top:4px;border-top:1px solid var(--border);padding-top:20px;margin-bottom:4px">
+<p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:0.5;margin-bottom:16px">Shop Behaviour</p>
+
+<div class="form-row">
+<div class="form-group">
+<label>Free Shipping Above (₹)</label>
+<input type="number" id="settingFreeShipping" placeholder="2000" min="0">
+<span style="font-size:11px;opacity:0.4;margin-top:5px;display:block">Updates the marquee strip automatically.</span>
+</div>
+<div class="form-group">
+<label>Delivery Time (shown on site)</label>
+<input type="text" id="settingDeliveryDays" placeholder="e.g. 3–5">
+<span style="font-size:11px;opacity:0.4;margin-top:5px;display:block">e.g. 3–5 days, 5–7 days.</span>
+</div>
+</div>
+
+<div class="form-group">
+<label>WhatsApp Greeting Message</label>
+<textarea id="settingGreeting" rows="2" placeholder="Hi, I came across Kashmir Weaves..."></textarea>
+<span style="font-size:11px;opacity:0.4;margin-top:5px;display:block">Sent when visitor clicks WhatsApp Us or the float button.</span>
+</div>
+
+<div class="form-group" style="flex-direction:row;align-items:center;gap:14px">
+<label style="margin:0;opacity:1;font-size:11px;letter-spacing:2px;text-transform:uppercase">Shop Open</label>
+<input type="checkbox" id="settingShopOpen" style="width:18px;height:18px;accent-color:var(--gold);cursor:pointer;background:none;border:none;padding:0">
+<span style="font-size:11px;opacity:0.5">Uncheck to disable Add to Cart and show a closed banner.</span>
+</div>
+</div>
 <button class="submit-btn" onclick="saveSettings()">Save Settings</button>
 <div id="settingsMsg" style="margin-top:12px"></div>
 
@@ -1679,6 +1896,10 @@ function doGet(e) {
 //  All functions in correct order. No assembly required.
 // ============================================================
 
+// Capture original source before any DOM mutations.
+// Used by exportSite() — works on local files and all hosting.
+var _sourceHTML = document.documentElement.outerHTML;
+
 // ============================================================
 //  SECTION 1: UTILITY FUNCTIONS (defined first, used everywhere)
 // ============================================================
@@ -1747,147 +1968,36 @@ function scrollToTop() {
 // ============================================================
 
 var SETTINGS = {
-  "phone": "916006496465",
-  "shopName": "Kashmir Weaves",
-  "location": "Srinagar, J&K — 190001",
-  "razorpayKey": "rzp_test_YourKeyHere",
-  "adminPasswordHash": "h_g10hvh",
-  "googleSheetURL": "",
-  "sheetToken": "change-this-secret-token"
+  phone: '916006496465',
+  shopName: 'Kashmir Weaves',
+  location: 'Residency Road, Srinagar, J&K — 190001',
+  razorpayKey: 'rzp_test_YourKeyHere',
+  adminPasswordHash: simpleHash('admin123'),
+  googleSheetURL: '',
+  sheetToken: 'change-this-secret-token',
+  freeShippingMin: 2000,
+  deliveryDays: '3–5',
+  whatsappGreeting: 'Hi, I came across Kashmir Weaves and would love to explore your Kashmiri collection.',
+  shopOpen: true
 };
 
-
 var categories = [
-  {
-    "id": "shawl",
-    "name": "Shawls",
-    "footerLabel": "Wool Shawls"
-  },
-  {
-    "id": "suit",
-    "name": "Suits",
-    "footerLabel": "Kashmiri Suits"
-  },
-  {
-    "id": "pashmina",
-    "name": "Pure Pashmina",
-    "footerLabel": "Pure Pashmina Shawls"
-  },
-  {
-    "id": "kurti",
-    "name": "Kurtis",
-    "footerLabel": "Kashmiri Kurtis"
-  }
+  { id: 'shawl',    name: 'Shawls',        footerLabel: 'Wool Shawls' },
+  { id: 'suit',     name: 'Suits',         footerLabel: 'Kashmiri Suits' },
+  { id: 'pashmina', name: 'Pure Pashmina', footerLabel: 'Pure Pashmina Shawls' },
+  { id: 'kurti',    name: 'Kurtis',        footerLabel: 'Kashmiri Kurtis' }
 ];
-
 
 var products = [
-  {
-    "id": 1,
-    "name": "Sozni Jaal Shawl",
-    "category": "shawl",
-    "price": 4500,
-    "material": "100% Pashmina",
-    "work": "hand",
-    "desc": "Fine Sozni needle work. Intricate floral jaal pattern.",
-    "badge": "hot",
-    "emoji": "🧣",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 2,
-    "name": "Aari Work Suit",
-    "category": "suit",
-    "price": 3200,
-    "material": "Silk Cotton Blend",
-    "work": "hand",
-    "desc": "3-piece Kashmiri suit with dense Aari crewel embroidery.",
-    "badge": "new",
-    "emoji": "👗",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 3,
-    "name": "Pure Pashmina Wrap",
-    "category": "pashmina",
-    "price": 8500,
-    "material": "100% Pashmina — GI Tagged",
-    "work": "hand",
-    "desc": "Plain weave pure Pashmina. Softest grade.",
-    "badge": "pure",
-    "emoji": "🏔️",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 4,
-    "name": "Tilla Embroidery Shawl",
-    "category": "shawl",
-    "price": 2800,
-    "material": "Wool Blend",
-    "work": "machine",
-    "desc": "Gold and silver Tilla embroidery on premium wool.",
-    "badge": "",
-    "emoji": "✨",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 5,
-    "name": "Kani Weave Shawl",
-    "category": "pashmina",
-    "price": 12000,
-    "material": "Pashmina-Silk Blend",
-    "work": "hand",
-    "desc": "Traditional Kani weave. Pattern woven into fabric.",
-    "badge": "pure",
-    "emoji": "🎨",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 6,
-    "name": "Casual Kashmiri Suit",
-    "category": "suit",
-    "price": 1800,
-    "material": "Cotton Blend",
-    "work": "machine",
-    "desc": "Machine embroidered daily-wear suit.",
-    "badge": "new",
-    "emoji": "👘",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 7,
-    "name": "Merino Wool Shawl",
-    "category": "shawl",
-    "price": 1500,
-    "material": "Fine Merino Wool",
-    "work": "machine",
-    "desc": "Budget-friendly merino wool shawl.",
-    "badge": "",
-    "emoji": "🌿",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 8,
-    "name": "Bridal Pashmina Set",
-    "category": "pashmina",
-    "price": 18000,
-    "material": "100% Pashmina — Hand Embroidered",
-    "work": "hand",
-    "desc": "Full Sozni hand-embroidered Pashmina.",
-    "badge": "hot",
-    "emoji": "💍",
-    "images": [],
-    "soldOut": false
-  }
+  { id:1, name:'Sozni Jaal Shawl',      category:'shawl',    price:4500,  material:'100% Pashmina',                   work:'hand',    desc:'Fine Sozni needle work. Intricate floral jaal pattern.', badge:'hot',  emoji:'🧣', images:[], soldOut:false },
+  { id:2, name:'Aari Work Suit',        category:'suit',     price:3200,  material:'Silk Cotton Blend',                work:'hand',    desc:'3-piece Kashmiri suit with dense Aari crewel embroidery.', badge:'new',  emoji:'👗', images:[], soldOut:false },
+  { id:3, name:'Pure Pashmina Wrap',    category:'pashmina', price:8500,  material:'100% Pashmina — GI Tagged',        work:'hand',    desc:'Plain weave pure Pashmina. Softest grade.',               badge:'pure', emoji:'🏔️', images:[], soldOut:false },
+  { id:4, name:'Tilla Embroidery Shawl',category:'shawl',    price:2800,  material:'Wool Blend',                       work:'machine', desc:'Gold and silver Tilla embroidery on premium wool.',       badge:'',     emoji:'✨', images:[], soldOut:false },
+  { id:5, name:'Kani Weave Shawl',      category:'pashmina', price:12000, material:'Pashmina-Silk Blend',              work:'hand',    desc:'Traditional Kani weave. Pattern woven into fabric.',      badge:'pure', emoji:'🎨', images:[], soldOut:false },
+  { id:6, name:'Casual Kashmiri Suit',  category:'suit',     price:1800,  material:'Cotton Blend',                     work:'machine', desc:'Machine embroidered daily-wear suit.',                    badge:'new',  emoji:'👘', images:[], soldOut:false },
+  { id:7, name:'Merino Wool Shawl',     category:'shawl',    price:1500,  material:'Fine Merino Wool',                 work:'machine', desc:'Budget-friendly merino wool shawl.',                      badge:'',     emoji:'🌿', images:[], soldOut:false },
+  { id:8, name:'Bridal Pashmina Set',   category:'pashmina', price:18000, material:'100% Pashmina — Hand Embroidered', work:'hand',    desc:'Full Sozni hand-embroidered Pashmina.',                   badge:'hot',  emoji:'💍', images:[], soldOut:false }
 ];
-
 
 var cart = [];
 var nextId = 9;
@@ -1896,14 +2006,13 @@ var currentFilter = 'all';
 
 // About page image data — stores URLs or base64 for each slot
 var aboutImages = {
-  "storyMain": "https://i.ibb.co/rRnggkTd/shawls.png",
-  "craft1": "https://i.ibb.co/7NpHsFnp/sheep.png",
-  "craft2": "https://i.ibb.co/jvcZzRqg/kani.png",
-  "craft3": "https://i.ibb.co/0R0ySjkz/delivery.png",
-  "artisan1": "https://i.ibb.co/yD0tYy2/aari-work.png",
-  "artisan2": "https://i.ibb.co/RGCmRTpp/sozni-work.png"
+  storyMain: 'https://i.ibb.co/rRnggkTd/shawls.png',
+  craft1:    'https://i.ibb.co/7NpHsFnp/sheep.png',
+  craft2:    'https://i.ibb.co/jvcZzRqg/kani.png',
+  craft3:    'https://i.ibb.co/0R0ySjkz/delivery.png',
+  artisan1:  'https://i.ibb.co/yD0tYy2/aari-work.png',
+  artisan2:  'https://i.ibb.co/RGCmRTpp/sozni-work.png'
 };
-
 
 // About page slot configuration — defines all 6 image slots
 var aboutSlotConfig = [
@@ -1997,9 +2106,9 @@ function renderFilterBar() {
 function renderFooterLinks() {
   var ul = document.getElementById('footerCategoryLinks');
   if (!ul) return;
-  var html = '<li><a href="#shop" onclick="footerFilter(\'all\')">All Products</a></li>';
+  var html = '<li><a href="#products" onclick="footerFilter(\'all\')">All Products</a></li>';
   categories.filter(function(c) { return c.footerLabel; }).forEach(function(cat) {
-    html += '<li><a href="#shop" onclick="footerFilter(\'' +
+    html += '<li><a href="#products" onclick="footerFilter(\'' +
       sanitise(cat.id) + '\')">' + sanitise(cat.footerLabel) + '</a></li>';
   });
   ul.innerHTML = html;
@@ -2009,7 +2118,7 @@ function footerFilter(filter) {
   currentFilter = filter;
   renderFilterBar();
   renderProducts(filter);
-  setTimeout(function() { document.getElementById('shop').scrollIntoView({ behavior: 'smooth' }); }, 100);
+  setTimeout(function() { document.getElementById('products').scrollIntoView({ behavior: 'smooth' }); }, 100);
 }
 
 function filterProducts(filter, btn) {
@@ -2072,7 +2181,9 @@ function renderProducts(filter) {
 
     var cartBtn = p.soldOut
       ? '<button class="add-cart-btn" disabled>Sold Out</button>'
-      : '<button class="add-cart-btn" onclick="addToCart(' + pid + ')">Add to Cart</button>';
+      : !SETTINGS.shopOpen
+        ? '<button class="add-cart-btn" style="background:#666;cursor:not-allowed;font-size:9px" disabled>WhatsApp to Order</button>'
+        : '<button class="add-cart-btn" onclick="addToCart(' + pid + ')">Add to Cart</button>';
 
     var innerHTML;
     if (imgs.length === 0) {
@@ -2165,8 +2276,19 @@ function addToCart(id) {
   var product = products.find(function(p) { return p.id === id; });
   if (!product || product.soldOut) return;
   var existing = cart.find(function(i) { return i.id === id; });
-  if (existing) { existing.qty++; }
-  else { cart.push({ ...product, qty: 1 }); }
+  if (existing) {
+    existing.qty++;
+  } else {
+    // Store only fields cart needs — avoids duplicating large image data in localStorage
+    cart.push({
+      id:     product.id,
+      name:   product.name,
+      price:  product.price,
+      emoji:  product.emoji,
+      images: product.images,
+      qty:    1
+    });
+  }
   updateCartUI();
   saveState();
   showToast(product.name + ' added to cart');
@@ -2929,13 +3051,17 @@ function deleteCategory(id) {
 // ============================================================
 
 function loadSettingsForm() {
-  document.getElementById('settingShopName').value   = SETTINGS.shopName || '';
-  document.getElementById('settingLocation').value   = SETTINGS.location || '';
-  document.getElementById('settingPhone').value      = SETTINGS.phone || '';
-  document.getElementById('settingRazorpay').value   = SETTINGS.razorpayKey || '';
-  document.getElementById('settingSheetURL').value   = SETTINGS.googleSheetURL || '';
-  document.getElementById('settingSheetToken').value = SETTINGS.sheetToken || '';
-  document.getElementById('settingPassword').value   = '';
+  document.getElementById('settingShopName').value     = SETTINGS.shopName || '';
+  document.getElementById('settingLocation').value     = SETTINGS.location || '';
+  document.getElementById('settingPhone').value        = SETTINGS.phone || '';
+  document.getElementById('settingRazorpay').value     = SETTINGS.razorpayKey || '';
+  document.getElementById('settingSheetURL').value     = SETTINGS.googleSheetURL || '';
+  document.getElementById('settingSheetToken').value   = SETTINGS.sheetToken || '';
+  document.getElementById('settingPassword').value     = '';
+  document.getElementById('settingFreeShipping').value = SETTINGS.freeShippingMin || 2000;
+  document.getElementById('settingDeliveryDays').value = SETTINGS.deliveryDays || '3–5';
+  document.getElementById('settingGreeting').value     = SETTINGS.whatsappGreeting || '';
+  document.getElementById('settingShopOpen').checked   = SETTINGS.shopOpen !== false;
 }
 
 function saveSettings() {
@@ -2994,6 +3120,18 @@ function saveSettings() {
   if (sheetURL)   SETTINGS.googleSheetURL = sheetURL;
   if (sheetToken) SETTINGS.sheetToken = sheetToken;
 
+  // New settings
+  var freeShip = parseInt(document.getElementById('settingFreeShipping').value);
+  if (!isNaN(freeShip) && freeShip >= 0) SETTINGS.freeShippingMin = freeShip;
+
+  var delivDays = document.getElementById('settingDeliveryDays').value.trim();
+  if (delivDays) SETTINGS.deliveryDays = delivDays;
+
+  var greeting = document.getElementById('settingGreeting').value.trim();
+  if (greeting) SETTINGS.whatsappGreeting = greeting;
+
+  SETTINGS.shopOpen = document.getElementById('settingShopOpen').checked;
+
   if (newPass) {
     if (newPass.length < 4) {
       msgEl.innerHTML = '<div class="admin-msg error">Password must be at least 4 characters.</div>';
@@ -3004,6 +3142,8 @@ function saveSettings() {
   }
 
   saveState();
+  applySettingsToPage();
+  renderProducts(currentFilter); // refresh cart buttons if shopOpen changed
   var sheetStatus = sheetURL ? ' Google Sheet connected.' : '';
   msgEl.innerHTML = '<div class="admin-msg success">Settings saved!' + sheetStatus + '</div>';
   setTimeout(function() { msgEl.innerHTML = ''; }, 4000);
@@ -3025,69 +3165,118 @@ function toggleSheetInstructions(btn) {
 function exportSite() {
   var msgEl = document.getElementById('exportMsg');
 
-  // Warn if base64 images exist
-  var hasBase64 = products.some(function(p) {
+  // Warn if base64 images exist in products OR aboutImages (makes file very large)
+  var productBase64 = products.some(function(p) {
     return (p.images || []).some(function(img) { return img && img.startsWith('data:'); });
   });
+  var aboutBase64 = Object.values(aboutImages).some(function(v) {
+    return v && v.startsWith('data:');
+  });
+  var hasBase64 = productBase64 || aboutBase64;
   if (hasBase64) {
-    if (!confirm('Some products have uploaded images instead of URLs. The exported file will be very large.\n\nFor best results use imgbb.com URLs instead.\n\nContinue anyway?')) return;
+    var where = [];
+    if (productBase64) where.push('product images');
+    if (aboutBase64)   where.push('About page images');
+    if (!confirm(
+      'Some images are uploaded files (' + where.join(' and ') + ').\n' +
+      'The exported file will be very large.\n\n' +
+      'Recommended: use imgbb.com URLs instead, then re-export.\n\n' +
+      'Continue anyway?'
+    )) return;
   }
 
-  msgEl.innerHTML = '<div class="admin-msg" style="opacity:0.6">Preparing file...</div>';
+  msgEl.innerHTML = '<div class="admin-msg" style="opacity:0.6">Building export...</div>';
 
-  // Fetch the original clean source file
-  fetch(window.location.href)
-    .then(function(r) { return r.text(); })
-    .then(function(html) {
+  try {
+    // Use the source captured at page load — works on local files,
+    // GitHub Pages, Netlify, or any other host.
+    var html = _sourceHTML;
+    var failed = [];
 
-      // Inject products
-      html = html.replace(
-        /var products = \[[\s\S]*?\];(\s*var cart)/,
-        'var products = ' + JSON.stringify(products, null, 2) + ';\n$1'
-      );
+    function inject(label, pattern, replacement) {
+      var before = html;
+      html = html.replace(pattern, replacement);
+      if (html === before) failed.push(label);
+    }
 
-      // Inject aboutImages
-      html = html.replace(
-        /var aboutImages = \{[\s\S]*?\};(\s*\/\/ About page slot)/,
-        'var aboutImages = ' + JSON.stringify(aboutImages, null, 2) + ';\n$1'
-      );
+    // 1. SETTINGS — all fields: shopName, phone, razorpayKey, adminPasswordHash,
+    //    freeShippingMin, deliveryDays, whatsappGreeting, shopOpen, etc.
+    inject('SETTINGS',
+      /var SETTINGS = \{[\s\S]*?\};(\s*\n\nvar categories)/,
+      'var SETTINGS = ' + JSON.stringify(SETTINGS, null, 2) + ';\n$1'
+    );
 
-      // Inject SETTINGS
-      html = html.replace(
-        /var SETTINGS = \{[\s\S]*?\};(\s*var categories)/,
-        'var SETTINGS = ' + JSON.stringify(SETTINGS, null, 2) + ';\n$1'
-      );
+    // 2. categories
+    inject('categories',
+      /var categories = \[[\s\S]*?\];(\s*\n\nvar products)/,
+      'var categories = ' + JSON.stringify(categories, null, 2) + ';\n$1'
+    );
 
-      // Inject categories
-      html = html.replace(
-        /var categories = \[[\s\S]*?\];(\s*var products)/,
-        'var categories = ' + JSON.stringify(categories, null, 2) + ';\n$1'
-      );
+    // 3. products — full list with all images, prices, descriptions
+    inject('products',
+      /var products = \[[\s\S]*?\];(\s*\n\nvar cart)/,
+      'var products = ' + JSON.stringify(products, null, 2) + ';\n$1'
+    );
 
-      // Inject nextId
-      html = html.replace(
-        /var nextId = \d+;/,
-        'var nextId = ' + nextId + ';'
-      );
+    // 4. cart — always empty in export (no visitor's cart baked in)
+    inject('cart',
+      /var cart = \[.*?\];/,
+      'var cart = [];'
+    );
 
-      // Download
-      var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-      var url  = URL.createObjectURL(blob);
-      var a    = document.createElement('a');
-      a.href     = url;
-      a.download = 'index.html';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+    // 5. nextId — preserve correct ID counter so new products don't collide
+    inject('nextId',
+      /var nextId = \d+;/,
+      'var nextId = ' + nextId + ';'
+    );
 
-      msgEl.innerHTML = '<div class="admin-msg success">Downloaded! Upload this file to GitHub to go live.</div>';
-      setTimeout(function() { msgEl.innerHTML = ''; }, 5000);
-    })
-    .catch(function(e) {
-      console.error('Export failed:', e);
-      msgEl.innerHTML = '<div class="admin-msg error">Export failed. Make sure you are on the hosted site, not a local file.</div>';
-    });
+    // 6. aboutImages — all 6 story/craft/artisan image URLs
+    inject('aboutImages',
+      /var aboutImages = \{[\s\S]*?\};(\s*\n\n\/\/ About page slot configuration)/,
+      'var aboutImages = ' + JSON.stringify(aboutImages, null, 2) + ';\n$1'
+    );
+
+    // 7. _sourceHTML — keep the declaration so re-export from the exported file works
+    // No replacement needed — the line stays as-is and runs again on next page load
+
+    if (failed.length > 0) {
+      msgEl.innerHTML = '<div class="admin-msg error">' +
+        '⚠ Export warning — ' + failed.length + ' section(s) could not be injected: <b>' +
+        failed.join(', ') + '</b>.<br>' +
+        'The rest was exported. Review before uploading.' +
+        '</div>';
+      // Do NOT auto-clear — user must read which sections failed
+    }
+
+    var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    a.href     = url;
+    a.download = 'index.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+
+    var size    = (blob.size / 1024).toFixed(0);
+    var updated = 6 - failed.length;
+    var summary = failed.length === 0
+      ? 'All 6 data sections updated. Upload to any hosting server.'
+      : updated + '/6 sections updated. Check the warning above before uploading.';
+
+    if (failed.length === 0) {
+      msgEl.innerHTML = '<div class="admin-msg success">' +
+        '✅ index.html exported (' + size + ' KB) — ' + summary +
+        '</div>';
+      setTimeout(function() { msgEl.innerHTML = ''; }, 7000);
+    }
+
+  } catch(e) {
+    console.error('Export error:', e);
+    msgEl.innerHTML = '<div class="admin-msg error">' +
+      '❌ Export failed: ' + e.message +
+      '</div>';
+  }
 }
 
 // ============================================================
@@ -3284,6 +3473,27 @@ function applySettingsToPage() {
     var phEl = document.getElementById('footerPhone');
     if (phEl) phEl.textContent = '📱 ' + display;
   }
+
+  // Free shipping threshold — update marquee AND promise card
+  var threshold = SETTINGS.freeShippingMin || 2000;
+  var shippingText = 'Free Shipping Above ₹' + Number(threshold).toLocaleString('en-IN');
+  ['marqueeShipping1','marqueeShipping2'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = shippingText;
+  });
+  var promiseEl = document.getElementById('promiseFreeShipping');
+  if (promiseEl) promiseEl.textContent = Number(threshold).toLocaleString('en-IN');
+
+  // Delivery days — update both craft step and promise card
+  var days = SETTINGS.deliveryDays || '3–5';
+  ['deliveryDaysText','deliveryDaysText2'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = days;
+  });
+
+  // Shop open/closed toggle
+  var banner = document.getElementById('shopClosedBanner');
+  if (banner) banner.style.display = SETTINGS.shopOpen ? 'none' : 'block';
 }
 
 // ============================================================
