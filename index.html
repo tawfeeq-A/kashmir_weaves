@@ -1,13 +1,15 @@
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Authentic Kashmiri suits, shawls, and pure Pashmina. Hand embroidered by master artisans in Srinagar. Direct shipping across India.">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Kashmir Weaves — Authentic Kashmiri Suits &amp; Shawls</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Cinzel:wght@400;600&amp;family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🧣&lt;/text&gt;&lt;/svg&gt;">
+<title>Kashmir Weaves — Authentic Kashmiri Suits & Shawls</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧣</text></svg>">
 <style>
 :root{
 --cream:#f5f0e8;
@@ -128,7 +130,11 @@ line-height:1.0;margin-bottom:28px;
 }
 .hero-title em{font-style:italic;color:var(--gold-light)}
 .hero-sub{font-size:15px;line-height:1.8;opacity:0.7;max-width:460px;margin-bottom:44px}
-.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+.hero-btns{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.hero-btns .btn-gold,
+.hero-btns .btn-outline{
+width:220px;text-align:center;box-sizing:border-box;
+}
 .btn-gold{
 background:var(--gold);color:var(--deep);border:none;
 padding:16px 36px;cursor:pointer;font-family:'Jost',sans-serif;
@@ -144,6 +150,32 @@ font-size:11px;letter-spacing:3px;text-transform:uppercase;
 transition:border-color 0.3s;text-decoration:none;display:inline-block;
 }
 .btn-outline:hover{border-color:var(--gold);color:var(--gold-light)}
+
+/* ===== KASHMIRI TOUCH — CHINAR LEAVES ===== */
+
+/* Falling leaves on hero */
+.chinar-leaf{
+position:absolute;opacity:0;pointer-events:none;z-index:1;
+animation:chinaFall linear infinite;
+}
+@keyframes chinaFall{
+0%  {opacity:0;transform:translateY(-40px) rotate(0deg)}
+8%  {opacity:0.55}
+90% {opacity:0.35}
+100%{opacity:0;transform:translateY(110vh) rotate(360deg) translateX(60px)}
+}
+
+/* Chinar divider between sections */
+.chinar-divider{
+display:flex;align-items:center;justify-content:center;
+gap:14px;padding:10px 0;background:var(--warm-white);
+}
+.chinar-divider::before,
+.chinar-divider::after{
+content:'';flex:1;height:1px;
+background:linear-gradient(to right,transparent,rgba(184,134,11,0.25),transparent);
+}
+.chinar-divider svg{flex-shrink:0;opacity:0.45}
 
 /* ===== MARQUEE ===== */
 .marquee-strip{background:var(--gold);padding:13px 0;overflow:hidden;white-space:nowrap}
@@ -173,17 +205,82 @@ cursor:pointer;transition:all 0.3s;color:var(--deep);
 .filter-btn:hover,.filter-btn.active{
 background:var(--deep);color:var(--cream);border-color:var(--deep);
 }
-.products-section{background:var(--warm-white);padding:20px 60px 80px}
-.products-grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-gap:24px;max-width:1300px;margin:0 auto;
+.products-section{background:var(--warm-white);padding:20px 0 80px}
+
+/* ===== PRODUCT SHOWCASE CAROUSEL ===== */
+.showcase-wrap{position:relative;padding:0 60px}
+.showcase-track-outer{overflow:hidden}
+.showcase-track{
+display:flex;gap:24px;
+transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
 }
+.showcase-track .product-card{
+flex:0 0 calc(25% - 18px);
+min-width:0;
+}
+
+/* Animation 1 — card fade-up on appear */
 .product-card{
-background:white;overflow:hidden;
-transition:transform 0.3s,box-shadow 0.3s;position:relative;
+background:white;overflow:hidden;position:relative;
+display:flex;flex-direction:column;
+opacity:0;transform:translateY(28px);
+transition:opacity 0.55s ease,transform 0.55s ease,box-shadow 0.3s;
 }
+.product-card.card-visible{opacity:1;transform:translateY(0)}
+
+/* Animation 2 — lift on hover */
 .product-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(26,16,8,0.15)}
+
+/* Carousel arrows */
+.showcase-arrow{
+position:absolute;top:140px;
+background:var(--deep);border:none;color:var(--cream);
+width:44px;height:44px;cursor:pointer;z-index:10;
+display:flex;align-items:center;justify-content:center;
+font-size:20px;transition:background 0.2s;
+}
+.showcase-arrow:hover{background:var(--gold);color:var(--deep)}
+.showcase-arrow.s-prev{left:6px}
+.showcase-arrow.s-next{right:6px}
+.showcase-arrow:disabled{opacity:0.25;cursor:default;pointer-events:none}
+
+/* Carousel dots */
+.showcase-dots{display:flex;justify-content:center;gap:8px;margin-top:28px}
+.showcase-dot{
+width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;padding:0;
+background:rgba(26,16,8,0.2);transition:background 0.3s,transform 0.3s;
+}
+.showcase-dot.active{background:var(--gold);transform:scale(1.3)}
+
+/* See All button */
+.see-all-wrap{text-align:center;margin-top:40px}
+.see-all-btn{
+background:none;border:1px solid rgba(26,16,8,0.3);color:var(--deep);
+padding:14px 40px;cursor:pointer;font-family:'Jost',sans-serif;
+font-size:11px;letter-spacing:3px;text-transform:uppercase;
+transition:all 0.3s;display:inline-flex;align-items:center;gap:10px;
+}
+.see-all-btn:hover{background:var(--deep);color:var(--cream);border-color:var(--deep)}
+.see-all-btn::after{content:'→';transition:transform 0.3s}
+.see-all-btn:hover::after{transform:translateX(4px)}
+
+/* Full grid (shown after See All is clicked) */
+.products-grid{
+display:none;
+grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+gap:24px;max-width:1300px;margin:0 auto;padding:0 60px;
+}
+.products-grid.grid-visible{display:grid}
+
+/* Animation 3 — shimmer sweep on product image hover */
+.product-img::after{
+content:'';position:absolute;inset:0;
+background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.18) 50%,transparent 60%);
+transform:translateX(-100%);transition:transform 0s;pointer-events:none;
+}
+.product-card:hover .product-img::after{
+transform:translateX(200%);transition:transform 0.6s ease;
+}
 .product-img{
 width:100%;height:280px;object-fit:cover;
 display:flex;align-items:center;justify-content:center;
@@ -276,13 +373,13 @@ font-family:'Cinzel',serif;font-size:13px;
 letter-spacing:4px;text-transform:uppercase;
 color:white;background:rgba(139,58,42,0.9);padding:10px 24px;
 }
-.product-body{padding:20px 24px 24px}
+.product-body{padding:20px 24px 24px;display:flex;flex-direction:column;flex:1}
 .product-category{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
 .product-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--deep);margin-bottom:4px}
 .product-material{font-size:11px;opacity:0.5;margin-bottom:12px;color:var(--deep)}
 .product-footer{
 display:flex;align-items:center;justify-content:space-between;
-margin-top:16px;padding-top:16px;border-top:1px solid rgba(26,16,8,0.08);
+margin-top:auto;padding-top:16px;border-top:1px solid rgba(26,16,8,0.08);
 }
 .product-price{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--deep)}
 .product-price span{font-size:13px;font-family:'Jost',sans-serif;opacity:0.5;margin-right:2px}
@@ -1123,7 +1220,7 @@ transition:border-color 0.3s,transform 0.3s;
 .emb-card:hover{border-color:var(--gold);transform:translateY(-4px)}
 .emb-num{
 font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;
-color:rgba(184,134,11,0.13);line-height:1;margin-bottom:20px;
+color:rgba(184,134,11,0.35);line-height:1;margin-bottom:20px;
 }
 .emb-name{
 font-family:'Cormorant Garamond',serif;font-size:24px;
@@ -1132,9 +1229,12 @@ font-weight:400;color:var(--deep);margin-bottom:10px;
 .emb-desc{font-size:13px;line-height:1.7;opacity:0.6}
 @media(max-width:768px){
 .collections-section{padding:60px 20px 80px}
-.cat-grid{grid-template-columns:1fr}
-.cat-card:first-child{grid-row:auto}
-.cat-card:first-child .cat-bg{min-height:360px}
+.cat-grid{grid-template-columns:1fr 1fr}
+.cat-card:first-child{grid-column:1/3;grid-row:auto}
+.cat-card:first-child .cat-bg{min-height:320px}
+.cat-bg{min-height:200px}
+.cat-name{font-size:20px}
+.cat-desc{font-size:11px}
 .embroidery-section{padding:0 20px 80px}
 .embroidery-grid{grid-template-columns:1fr}
 }
@@ -1160,8 +1260,13 @@ padding:20px 24px;gap:16px;
 border-bottom:1px solid var(--border);
 }
 .nav-links.mobile-open{display:flex}
-.filter-section,.products-section{padding-left:20px;padding-right:20px}
-.products-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.filter-section{padding-left:20px;padding-right:20px}
+.showcase-wrap{padding:0}
+.showcase-arrow.s-prev{left:0}
+.showcase-arrow.s-next{right:0}
+.showcase-track .product-card{flex:0 0 100%}
+.showcase-track{gap:0}
+.products-grid{padding:0 20px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
 .trust-section{grid-template-columns:1fr 1fr;padding:60px 24px}
 footer{grid-template-columns:1fr;padding:40px 24px}
 .footer-bottom{padding:20px 24px;flex-direction:column;gap:8px}
@@ -1211,6 +1316,27 @@ text-align:center;
 
 <!-- ===== HERO SECTION ===== -->
 <section class="hero">
+<!-- Chinar SVG symbol — defined once, reused everywhere -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="chinar" viewBox="0 0 80 90">
+    <path d="M40 85 C40 85 18 60 15 45 C12 30 20 18 30 20 C25 10 35 5 40 12 C45 5 55 10 50 20 C60 18 68 30 65 45 C62 60 40 85 40 85Z" fill="currentColor"/>
+    <path d="M40 85 C38 65 30 50 25 35" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.4"/>
+    <path d="M40 85 C42 65 50 50 55 35" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.4"/>
+    <path d="M40 55 C32 48 22 44 18 38" stroke="currentColor" stroke-width="1" fill="none" opacity="0.3"/>
+    <path d="M40 55 C48 48 58 44 62 38" stroke="currentColor" stroke-width="1" fill="none" opacity="0.3"/>
+  </symbol>
+</svg>
+<!-- Falling chinar leaves -->
+<svg class="chinar-leaf" style="width:28px;color:rgba(184,134,11,0.5);left:8%;animation-duration:9s;animation-delay:0s"   aria-hidden="true"><use href="#chinar"/></svg>
+<svg class="chinar-leaf" style="width:18px;color:rgba(139,58,42,0.45);left:22%;animation-duration:13s;animation-delay:2s"  aria-hidden="true"><use href="#chinar"/></svg>
+<svg class="chinar-leaf" style="width:24px;color:rgba(184,134,11,0.4);left:38%;animation-duration:11s;animation-delay:5s"  aria-hidden="true"><use href="#chinar"/></svg>
+<svg class="chinar-leaf" style="width:16px;color:rgba(139,58,42,0.5);left:55%;animation-duration:14s;animation-delay:1s"   aria-hidden="true"><use href="#chinar"/></svg>
+<svg class="chinar-leaf" style="width:22px;color:rgba(184,134,11,0.45);left:70%;animation-duration:10s;animation-delay:3.5s" aria-hidden="true"><use href="#chinar"/></svg>
+<svg class="chinar-leaf" style="width:20px;color:rgba(139,58,42,0.4);left:85%;animation-duration:12s;animation-delay:6.5s" aria-hidden="true"><use href="#chinar"/></svg>
+<svg class="chinar-leaf" style="width:14px;color:rgba(184,134,11,0.35);left:15%;animation-duration:16s;animation-delay:8s"  aria-hidden="true"><use href="#chinar"/></svg>
+<svg class="chinar-leaf" style="width:26px;color:rgba(139,58,42,0.4);left:47%;animation-duration:8s;animation-delay:4s"    aria-hidden="true"><use href="#chinar"/></svg>
+<svg class="chinar-leaf" style="width:19px;color:rgba(184,134,11,0.5);left:63%;animation-duration:15s;animation-delay:7s"  aria-hidden="true"><use href="#chinar"/></svg>
+<svg class="chinar-leaf" style="width:17px;color:rgba(139,58,42,0.45);left:92%;animation-duration:11s;animation-delay:0.5s" aria-hidden="true"><use href="#chinar"/></svg>
 <div class="hero-content">
 <div class="hero-tag">Srinagar, Kashmir — Direct to Your Door</div>
 <h1 class="hero-title">
@@ -1263,8 +1389,18 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
         <div class="cat-info">
           <div class="cat-label">Finest Collection</div>
           <div class="cat-name">Pure Pashmina<br>Shawls</div>
-          <div class="cat-desc">Sourced from Changthangi goats of Ladakh. Available in 100%, 70/30, and 50/50 blends with hand and machine embroidery.</div>
+          <div class="cat-desc">From Ladakh's Changthangi goats. Pure & blended. Hand or machine embroidery.</div>
           <a href="#products" class="cat-link" onclick="footerFilter('pashmina')">View Collection</a>
+        </div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-bg bg-shawls">
+        <div class="cat-info">
+          <div class="cat-label">Premium Range</div>
+          <div class="cat-name">Wool & Silk Shawls</div>
+          <div class="cat-desc">Wool & silk. Light yet warm. Hand and machine embroidery.</div>
+          <a href="#products" class="cat-link" onclick="footerFilter('shawl')">Explore</a>
         </div>
       </div>
     </div>
@@ -1273,16 +1409,8 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
         <div class="cat-info">
           <div class="cat-label">Traditional Wear</div>
           <div class="cat-name">Kashmiri Suits</div>
+          <div class="cat-desc">3-piece sets. Sozni, Aari or Tilla work. Cotton, silk & wool.</div>
           <a href="#products" class="cat-link" onclick="footerFilter('suit')">Explore</a>
-        </div>
-      </div>
-    </div>
-    <div class="cat-card">
-      <div class="cat-bg bg-shawls">
-        <div class="cat-info">
-          <div class="cat-label">Premium Range</div>
-          <div class="cat-name">Wool &amp; Silk Shawls</div>
-          <a href="#products" class="cat-link" onclick="footerFilter('shawl')">Explore</a>
         </div>
       </div>
     </div>
@@ -1291,6 +1419,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
         <div class="cat-info">
           <div class="cat-label">Everyday Elegance</div>
           <div class="cat-name">Kashmiri Kurtis</div>
+          <div class="cat-desc">Delicate embroidery. Effortless daily wear.</div>
           <a href="#products" class="cat-link" onclick="footerFilter('kurti')">Explore</a>
         </div>
       </div>
@@ -1299,13 +1428,21 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
       <div class="cat-bg" style="background:linear-gradient(135deg,#1a1a2a 0%,#2a2a4a 50%,#1a1a3a 100%)">
         <div class="cat-info">
           <div class="cat-label">Custom Work</div>
-          <div class="cat-name">Bulk &amp; Custom<br>Orders</div>
+          <div class="cat-name">Bulk & Custom<br>Orders</div>
+          <div class="cat-desc">Wholesale rates. Custom embroidery & sizing on request.</div>
           <a href="#" class="cat-link" onclick="openWhatsApp(SETTINGS.phone,'Hi, I am interested in a bulk or custom order from Kashmir Weaves. Please share details.');return false;">Enquire on WhatsApp</a>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ===== CHINAR DIVIDER ===== -->
+<div class="chinar-divider" aria-hidden="true">
+  <svg width="22" height="25" viewBox="0 0 80 90" style="color:var(--gold)"><use href="#chinar"/></svg>
+  <svg width="30" height="34" viewBox="0 0 80 90" style="color:var(--rust)"><use href="#chinar"/></svg>
+  <svg width="22" height="25" viewBox="0 0 80 90" style="color:var(--gold)"><use href="#chinar"/></svg>
+</div>
 
 <!-- ===== SHOP / PRODUCTS ===== -->
 <section id="products">
@@ -1316,7 +1453,18 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
 </div>
 </div>
 <div class="products-section">
-<div class="products-grid" id="productsGrid"></div>
+  <div class="showcase-wrap" id="showcaseWrap">
+    <button class="showcase-arrow s-prev" id="sPrev" onclick="showcasePrev()">&#8249;</button>
+    <div class="showcase-track-outer">
+      <div class="showcase-track" id="showcaseTrack"></div>
+    </div>
+    <button class="showcase-arrow s-next" id="sNext" onclick="showcaseNext()">&#8250;</button>
+  </div>
+  <div class="showcase-dots" id="showcaseDots"></div>
+  <div class="see-all-wrap" id="seeAllWrap">
+    <button class="see-all-btn" onclick="showAllProducts()">See All Products</button>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
 </div>
 </section>
 
@@ -1562,7 +1710,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
 <p>Direct from Srinagar. Authentic Kashmiri textiles — suits, shawls, and embroidered pieces shipped across India.</p>
 <br>
 <p id="footerPhone">📱 +91 6006 496465</p>
-<p style="margin-top:6px" id="footerLocation">📍 Residency Road, Srinagar, J&amp;K</p>
+<p style="margin-top:6px" id="footerLocation">📍 Residency Road, Srinagar, J&K</p>
 </div>
 <div class="footer-col">
 <h4>Collections</h4>
@@ -1576,7 +1724,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
 
 <!-- ===== WHATSAPP FLOAT BUTTON ===== -->
 <a class="whatsapp-float" href="#" onclick="openWhatsApp(SETTINGS.phone, SETTINGS.whatsappGreeting);return false;" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
-<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <!-- ===== TOAST NOTIFICATION ===== -->
@@ -1596,7 +1744,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
 <strong id="cartTotal">₹0</strong>
 </div>
 <button class="whatsapp-btn" onclick="orderWhatsApp()">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 Order via WhatsApp
 </button>
 <button class="razorpay-btn" onclick="openCheckout()">Pay Online (Razorpay)</button>
@@ -1733,7 +1881,7 @@ Order via WhatsApp
 </div>
 <div class="form-group">
 <label>Shop Location</label>
-<input type="text" id="settingLocation" placeholder="Residency Road, Srinagar, J&amp;K — 190001">
+<input type="text" id="settingLocation" placeholder="Residency Road, Srinagar, J&K — 190001">
 <span style="font-size:11px;opacity:0.4;margin-top:5px;display:block">Shown in footer and contact section.</span>
 </div>
 <div class="form-group">
@@ -1886,7 +2034,7 @@ function doGet(e) {
 </div><!-- /checkoutModal -->
 
 <!-- ===== SCRIPTS ===== -->
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script><div class="razorpay-container" style="z-index: 2147483647; position: fixed; top: 0px; display: none; left: 0px; height: 100%; width: 100%; max-height: 100dvh; backface-visibility: hidden; overflow-y: visible;"><style>@keyframes rzp-rot{to{transform: rotate(360deg);}}@-webkit-keyframes rzp-rot{to{-webkit-transform: rotate(360deg);}} .razorpay-container > iframe {min-height: 100%!important;}</style><div class="razorpay-backdrop" style="min-height: 100%; transition: 0.3s ease-out; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%;"><span style="text-decoration: none; background: rgb(214, 68, 68); border: 1px dashed white; padding: 3px; opacity: 0; transform: rotate(45deg); transition: opacity 0.3s ease-in; font-family: lato, ubuntu, helvetica, sans-serif; color: white; position: absolute; width: 200px; text-align: center; right: -50px; top: 50px;">Test Mode</span></div><iframe allowtransparency="true" frameborder="0" width="100%" height="100%" src="https://api.razorpay.com/v1/checkout/public?traffic_env=production&amp;build=c6fe32442dd81fcdaad178afcc8816bebddc07f9&amp;build_v1=615c956a899ee151dee1e89f7ea85e90d62f0e6e&amp;checkout_v2=1&amp;new_session=1&amp;rzp_device_id=1.48e86d2190aa159f202a5c001db7b365afea63df.1773138351240.70385002&amp;unified_session_id=SPi2uio49IItu8" class="razorpay-checkout-frame" allow="otp-credentials; payment; clipboard-write; publickey-credentials-get https://api.razorpay.com; publickey-credentials-create 'self' https://api.razorpay.com; web-share; camera *; local-network-access 'none'; loopback-network 'none';" style="opacity: 1; height: 100%; position: relative; background: none; display: block; border: 0px none transparent; margin: 0px; padding: 0px; z-index: 2;"></iframe></div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 
 // ============================================================
@@ -1966,151 +2114,36 @@ function scrollToTop() {
 // ============================================================
 
 var SETTINGS = {
-  "phone": "916006496465",
-  "shopName": "Kashmir Weaves",
-  "location": "Srinagar, J&K — 190001",
-  "razorpayKey": "rzp_test_YourKeyHere",
-  "adminPasswordHash": "h_g10hvh",
-  "googleSheetURL": "https://script.google.com/macros/s/AKfycbz3pDmPWfbmRt5nMdxoUDJyVqqi-fbvB-HvFoJY6WWTRGxxyQ8utqeIg7xoymoqAHWD/exec",
-  "sheetToken": "jennie@123",
-  "freeShippingMin": 5000,
-  "deliveryDays": "5-7",
-  "whatsappGreeting": "Hi, I came across Kashmir Weaves and would love to explore your Kashmiri collection.",
-  "shopOpen": true
+  phone: '916006496465',
+  shopName: 'Kashmir Weaves',
+  location: 'Residency Road, Srinagar, J&K — 190001',
+  razorpayKey: 'rzp_test_YourKeyHere',
+  adminPasswordHash: simpleHash('admin123'),
+  googleSheetURL: 'https://script.google.com/macros/s/AKfycbz3pDmPWfbmRt5nMdxoUDJyVqqi-fbvB-HvFoJY6WWTRGxxyQ8utqeIg7xoymoqAHWD/exec',
+  sheetToken: 'jennie@123',
+  freeShippingMin: 2000,
+  deliveryDays: '3–5',
+  whatsappGreeting: 'Hi, I came across Kashmir Weaves and would love to explore your Kashmiri collection.',
+  shopOpen: true
 };
 
-
 var categories = [
-  {
-    "id": "shawl",
-    "name": "Shawls",
-    "footerLabel": "Wool Shawls"
-  },
-  {
-    "id": "suit",
-    "name": "Suits",
-    "footerLabel": "Kashmiri Suits"
-  },
-  {
-    "id": "pashmina",
-    "name": "Pure Pashmina",
-    "footerLabel": "Pure Pashmina Shawls"
-  },
-  {
-    "id": "kurti",
-    "name": "Kurtis",
-    "footerLabel": "Kashmiri Kurtis"
-  }
+  { id: 'shawl',    name: 'Shawls',        footerLabel: 'Wool Shawls' },
+  { id: 'suit',     name: 'Suits',         footerLabel: 'Kashmiri Suits' },
+  { id: 'pashmina', name: 'Pure Pashmina', footerLabel: 'Pure Pashmina Shawls' },
+  { id: 'kurti',    name: 'Kurtis',        footerLabel: 'Kashmiri Kurtis' }
 ];
-
 
 var products = [
-  {
-    "id": 1,
-    "name": "Sozni Jaal Shawl",
-    "category": "shawl",
-    "price": 4500,
-    "material": "100% Pashmina",
-    "work": "hand",
-    "desc": "Fine Sozni needle work. Intricate floral jaal pattern.",
-    "badge": "hot",
-    "emoji": "🧣",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 2,
-    "name": "Aari Work Suit",
-    "category": "suit",
-    "price": 3200,
-    "material": "Silk Cotton Blend",
-    "work": "hand",
-    "desc": "3-piece Kashmiri suit with dense Aari crewel embroidery.",
-    "badge": "new",
-    "emoji": "👗",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 3,
-    "name": "Pure Pashmina Wrap",
-    "category": "pashmina",
-    "price": 8500,
-    "material": "100% Pashmina — GI Tagged",
-    "work": "hand",
-    "desc": "Plain weave pure Pashmina. Softest grade.",
-    "badge": "pure",
-    "emoji": "🏔️",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 4,
-    "name": "Tilla Embroidery Shawl",
-    "category": "shawl",
-    "price": 2800,
-    "material": "Wool Blend",
-    "work": "machine",
-    "desc": "Gold and silver Tilla embroidery on premium wool.",
-    "badge": "",
-    "emoji": "✨",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 5,
-    "name": "Kani Weave Shawl",
-    "category": "pashmina",
-    "price": 12000,
-    "material": "Pashmina-Silk Blend",
-    "work": "hand",
-    "desc": "Traditional Kani weave. Pattern woven into fabric.",
-    "badge": "pure",
-    "emoji": "🎨",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 6,
-    "name": "Casual Kashmiri Suit",
-    "category": "suit",
-    "price": 1800,
-    "material": "Cotton Blend",
-    "work": "machine",
-    "desc": "Machine embroidered daily-wear suit.",
-    "badge": "new",
-    "emoji": "👘",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 7,
-    "name": "Merino Wool Shawl",
-    "category": "shawl",
-    "price": 1500,
-    "material": "Fine Merino Wool",
-    "work": "machine",
-    "desc": "Budget-friendly merino wool shawl.",
-    "badge": "",
-    "emoji": "🌿",
-    "images": [],
-    "soldOut": false
-  },
-  {
-    "id": 8,
-    "name": "Bridal Pashmina Set",
-    "category": "pashmina",
-    "price": 18000,
-    "material": "100% Pashmina — Hand Embroidered",
-    "work": "hand",
-    "desc": "Full Sozni hand-embroidered Pashmina.",
-    "badge": "hot",
-    "emoji": "💍",
-    "images": [],
-    "soldOut": false
-  }
+  { id:1, name:'Sozni Jaal Shawl',      category:'shawl',    price:4500,  material:'100% Pashmina',                   work:'hand',    desc:'Fine Sozni needle work. Intricate floral jaal pattern.', badge:'hot',  emoji:'🧣', images:[], soldOut:false },
+  { id:2, name:'Aari Work Suit',        category:'suit',     price:3200,  material:'Silk Cotton Blend',                work:'hand',    desc:'3-piece Kashmiri suit with dense Aari crewel embroidery.', badge:'new',  emoji:'👗', images:[], soldOut:false },
+  { id:3, name:'Pure Pashmina Wrap',    category:'pashmina', price:8500,  material:'100% Pashmina — GI Tagged',        work:'hand',    desc:'Plain weave pure Pashmina. Softest grade.',               badge:'pure', emoji:'🏔️', images:[], soldOut:false },
+  { id:4, name:'Tilla Embroidery Shawl',category:'shawl',    price:2800,  material:'Wool Blend',                       work:'machine', desc:'Gold and silver Tilla embroidery on premium wool.',       badge:'',     emoji:'✨', images:[], soldOut:false },
+  { id:5, name:'Kani Weave Shawl',      category:'pashmina', price:12000, material:'Pashmina-Silk Blend',              work:'hand',    desc:'Traditional Kani weave. Pattern woven into fabric.',      badge:'pure', emoji:'🎨', images:[], soldOut:false },
+  { id:6, name:'Casual Kashmiri Suit',  category:'suit',     price:1800,  material:'Cotton Blend',                     work:'machine', desc:'Machine embroidered daily-wear suit.',                    badge:'new',  emoji:'👘', images:[], soldOut:false },
+  { id:7, name:'Merino Wool Shawl',     category:'shawl',    price:1500,  material:'Fine Merino Wool',                 work:'machine', desc:'Budget-friendly merino wool shawl.',                      badge:'',     emoji:'🌿', images:[], soldOut:false },
+  { id:8, name:'Bridal Pashmina Set',   category:'pashmina', price:18000, material:'100% Pashmina — Hand Embroidered', work:'hand',    desc:'Full Sozni hand-embroidered Pashmina.',                   badge:'hot',  emoji:'💍', images:[], soldOut:false }
 ];
-
 
 var cart = [];
 var nextId = 9;
@@ -2119,14 +2152,13 @@ var currentFilter = 'all';
 
 // About page image data — stores URLs or base64 for each slot
 var aboutImages = {
-  "storyMain": "https://i.ibb.co/rRnggkTd/shawls.png",
-  "craft1": "https://i.ibb.co/7NpHsFnp/sheep.png",
-  "craft2": "https://i.ibb.co/jvcZzRqg/kani.png",
-  "craft3": "https://i.ibb.co/0R0ySjkz/delivery.png",
-  "artisan1": "https://i.ibb.co/yD0tYy2/aari-work.png",
-  "artisan2": "https://i.ibb.co/RGCmRTpp/sozni-work.png"
+  storyMain: 'https://i.ibb.co/rRnggkTd/shawls.png',
+  craft1:    'https://i.ibb.co/7NpHsFnp/sheep.png',
+  craft2:    'https://i.ibb.co/jvcZzRqg/kani.png',
+  craft3:    'https://i.ibb.co/0R0ySjkz/delivery.png',
+  artisan1:  'https://i.ibb.co/yD0tYy2/aari-work.png',
+  artisan2:  'https://i.ibb.co/RGCmRTpp/sozni-work.png'
 };
-
 
 // About page slot configuration — defines all 6 image slots
 var aboutSlotConfig = [
@@ -2240,6 +2272,10 @@ function filterProducts(filter, btn) {
   document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
   renderProducts(filter);
+  // Reset full-grid view when filter changes
+  document.getElementById('productsGrid').classList.remove('grid-visible');
+  document.getElementById('showcaseWrap').style.display = '';
+  document.getElementById('showcaseDots').style.display = '';
 }
 
 // Category background colors
@@ -2263,15 +2299,129 @@ function getCategoryLabel(catId) {
 }
 
 function renderProducts(filter) {
-  var grid = document.getElementById('productsGrid');
   var filtered = filter === 'all' ? products : products.filter(function(p) { return p.category === filter; });
 
   if (filtered.length === 0) {
-    grid.innerHTML = '<div class="no-products">No products in this category yet</div>';
+    document.getElementById('showcaseTrack').innerHTML = '<div class="no-products" style="padding:60px;opacity:0.4;font-family:\'Cormorant Garamond\',serif;font-size:24px;color:var(--deep)">No products in this category yet</div>';
+    document.getElementById('showcaseDots').innerHTML = '';
+    document.getElementById('productsGrid').innerHTML = '';
     return;
   }
 
-  grid.innerHTML = filtered.map(function(p) {
+  var cardHTML = filtered.map(function(p) { return buildProductCard(p); }).join('');
+
+  // ── Carousel (showcase) ──
+  document.getElementById('showcaseTrack').innerHTML = cardHTML;
+  document.getElementById('productsGrid').innerHTML  = cardHTML;
+
+  // Reset carousel position
+  showcaseState.index  = 0;
+  showcaseState.total  = filtered.length;
+  showcaseState.perPage = getPerPage();
+  showcaseState.pages  = Math.ceil(filtered.length / showcaseState.perPage);
+  applyShowcasePosition();
+  renderShowcaseDots();
+
+  // Show carousel, hide full grid
+  document.getElementById('showcaseWrap').style.display  = '';
+  document.getElementById('showcaseDots').style.display  = '';
+  document.getElementById('seeAllWrap').style.display    = '';
+  document.getElementById('productsGrid').classList.remove('grid-visible');
+  document.getElementById('seeAllWrap').innerHTML =
+    '<button class="see-all-btn" onclick="showAllProducts()">See All Products</button>';
+
+  // Animate cards in
+  setTimeout(function() {
+    document.querySelectorAll('#showcaseTrack .product-card').forEach(function(el, i) {
+      setTimeout(function() { el.classList.add('card-visible'); }, i * 80);
+    });
+  }, 60);
+
+  // Start autoplay
+  showcaseAutoplay();
+}
+
+// ── Carousel state ──
+var showcaseState = { index:0, total:0, perPage:4, pages:1, timer:null };
+
+function getPerPage() {
+  return window.innerWidth <= 768 ? 1 : 4;
+}
+
+function applyShowcasePosition() {
+  var s = showcaseState;
+  var track = document.getElementById('showcaseTrack');
+  if (!track) return;
+  var containerW = track.parentElement.offsetWidth;
+  track.style.transform = 'translateX(-' + (s.index * containerW) + 'px)';
+  // Arrow state
+  var prev = document.getElementById('sPrev');
+  var next = document.getElementById('sNext');
+  if (prev) prev.disabled = s.index === 0;
+  if (next) next.disabled = s.index >= s.pages - 1;
+  // Dots
+  document.querySelectorAll('.showcase-dot').forEach(function(d, i) {
+    d.classList.toggle('active', i === s.index);
+  });
+}
+
+function renderShowcaseDots() {
+  var s = showcaseState;
+  var html = '';
+  for (var i = 0; i < s.pages; i++) {
+    html += '<button class="showcase-dot' + (i === 0 ? ' active' : '') +
+      '" onclick="showcaseGoto(' + i + ')"></button>';
+  }
+  document.getElementById('showcaseDots').innerHTML = html;
+}
+
+function showcaseNext() {
+  var s = showcaseState;
+  if (s.index < s.pages - 1) { s.index++; applyShowcasePosition(); }
+}
+function showcasePrev() {
+  var s = showcaseState;
+  if (s.index > 0) { s.index--; applyShowcasePosition(); }
+}
+function showcaseGoto(i) {
+  showcaseState.index = i;
+  applyShowcasePosition();
+}
+
+function showcaseAutoplay() {
+  clearInterval(showcaseState.timer);
+  showcaseState.timer = setInterval(function() {
+    var s = showcaseState;
+    s.index = (s.index + 1) % s.pages;
+    applyShowcasePosition();
+  }, 3500);
+  // Pause on hover
+  var wrap = document.getElementById('showcaseWrap');
+  if (wrap) {
+    wrap.onmouseenter = function() { clearInterval(showcaseState.timer); };
+    wrap.onmouseleave = function() { showcaseAutoplay(); };
+  }
+}
+
+function showAllProducts() {
+  var grid = document.getElementById('productsGrid');
+  var wrap = document.getElementById('showcaseWrap');
+  var dots = document.getElementById('showcaseDots');
+  var btn  = document.getElementById('seeAllWrap');
+  clearInterval(showcaseState.timer);
+  wrap.style.display = 'none';
+  dots.style.display = 'none';
+  grid.classList.add('grid-visible');
+  btn.innerHTML = '';
+  // Animate full grid cards
+  setTimeout(function() {
+    document.querySelectorAll('#productsGrid .product-card').forEach(function(el, i) {
+      setTimeout(function() { el.classList.add('card-visible'); }, i * 60);
+    });
+  }, 60);
+}
+
+function buildProductCard(p) {
     // Support both old single image and new images array
     var imgs = (p.images && p.images.length > 0) ? p.images : (p.image ? [p.image] : []);
     var em        = sanitise(p.emoji || '🧣');
@@ -2330,7 +2480,7 @@ function renderProducts(filter) {
         '</div>';
     }
 
-    return '<div class="product-card reveal' + (p.soldOut ? ' soldout' : '') + '">' +
+    return '<div class="product-card' + (p.soldOut ? ' soldout' : '') + '">' +
       '<div class="product-img" style="background:' + getBg(p.category) + '">' +
         innerHTML +
         '<div class="product-badge-wrap">' + badgeHTML + '</div>' +
@@ -2347,11 +2497,6 @@ function renderProducts(filter) {
         '</div>' +
       '</div>' +
     '</div>';
-  }).join('');
-
-  setTimeout(function() {
-    document.querySelectorAll('.product-card.reveal').forEach(function(el) { el.classList.add('visible'); });
-  }, 100);
 }
 
 // Slider state — tracks current index per product id
@@ -3654,4 +3799,15 @@ adminLoggedIn = false;
 document.getElementById('adminModal').classList.remove('open');
 document.getElementById('adminDashboard').style.display = 'none';
 document.getElementById('adminLoginSection').style.display = 'block';
-</script></body></html>
+
+// Recalculate carousel on resize
+window.addEventListener('resize', function() {
+  showcaseState.perPage = getPerPage();
+  showcaseState.pages   = Math.ceil(showcaseState.total / showcaseState.perPage);
+  showcaseState.index   = Math.min(showcaseState.index, showcaseState.pages - 1);
+  applyShowcasePosition();
+  renderShowcaseDots();
+});
+</script>
+</body>
+</html>
