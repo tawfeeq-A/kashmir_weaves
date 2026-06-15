@@ -22,13 +22,21 @@
 --border:rgba(184,134,11,0.2);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:78px}
 body{
 background:var(--deep);
 color:var(--cream);
 font-family:'Jost',sans-serif;
 font-weight:300;
 overflow-x:hidden;
+overscroll-behavior-y:none;
+-webkit-font-smoothing:antialiased;
+}
+
+
+@media (prefers-reduced-motion: reduce){
+html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}
 }
 
 /* ===== NAVIGATION ===== */
@@ -129,6 +137,7 @@ font-size:clamp(48px,7vw,88px);font-weight:300;
 line-height:1.0;margin-bottom:28px;
 }
 .hero-title em{font-style:italic;color:var(--gold-light)}
+.hero-cred{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);opacity:0.9;margin:-8px 0 20px;line-height:1.7;max-width:520px}
 .hero-sub{font-size:15px;line-height:1.8;opacity:0.7;max-width:460px;margin-bottom:44px}
 .hero-btns{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
 .hero-btns .btn-gold,
@@ -1342,7 +1351,8 @@ text-align:center;
 <h1 class="hero-title">
 Authentic<br><em>Kashmiri</em><br>Craftsmanship
 </h1>
-<p class="hero-sub">Handpicked suits and shawls. Pure Pashmina to premium wool blends. Hand and machine embroidery. Shipped pan-India.</p>
+<p class="hero-cred">Sourced in Ladakh. Crafted in Srinagar. Delivered across India.</p>
+<p class="hero-sub">Authentic suits and shawls. Pure Pashmina to premium wool blends. Hand and machine embroidery. Shipped pan-India.</p>
 <div class="hero-btns">
 <a href="#shop" class="btn-gold">Shop Now</a>
 <a href="#" onclick="openWhatsApp(SETTINGS.phone, SETTINGS.whatsappGreeting);return false;" class="btn-outline">WhatsApp Us</a>
@@ -1375,19 +1385,22 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
   <span style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:white">
     🛑 Shop temporarily closed — <a href="#" onclick="openWhatsApp(SETTINGS.phone, SETTINGS.whatsappGreeting);return false;" style="color:var(--gold-light);text-decoration:underline">WhatsApp us to order</a>
   </span>
+  <div style="font-size:12px;line-height:1.6;color:white;opacity:0.85;margin-top:6px">
+    We fulfil orders via WhatsApp daily. Message us your requirement and we respond within a few hours.
+  </div>
 </div>
 
 <!-- ===== COLLECTIONS GRID (above shop) ===== -->
 <section class="collections-section" id="shop">
   <div class="collections-header reveal">
     <div class="collections-tag">Our Collections</div>
-    <h2 class="collections-title">Every Piece Tells a<br><em>Kashmir Story</em></h2>
+    <h2 class="collections-title">Every Piece Carries<br><em>Kashmir's Craft</em></h2>
   </div>
   <div class="cat-grid reveal">
     <div class="cat-card">
       <div class="cat-bg bg-pashmina">
         <div class="cat-info">
-          <div class="cat-label">Finest Collection</div>
+          <div class="cat-label">Premium Pashmina</div>
           <div class="cat-name">Pure Pashmina<br>Shawls</div>
           <div class="cat-desc">From Ladakh's Changthangi goats. Pure & blended. Hand or machine embroidery.</div>
           <a href="#products" class="cat-link" onclick="footerFilter('pashmina')">View Collection</a>
@@ -1417,9 +1430,9 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
     <div class="cat-card">
       <div class="cat-bg bg-kurti">
         <div class="cat-info">
-          <div class="cat-label">Everyday Elegance</div>
+          <div class="cat-label">Daily Wear</div>
           <div class="cat-name">Kashmiri Kurtis</div>
-          <div class="cat-desc">Delicate embroidery. Effortless daily wear.</div>
+          <div class="cat-desc">Embroidered daily wear. Lightweight and easy to style.</div>
           <a href="#products" class="cat-link" onclick="footerFilter('kurti')">Explore</a>
         </div>
       </div>
@@ -1519,8 +1532,8 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
       <p class="story-text">
         In the narrow lanes of old Srinagar, behind wooden lattice windows, 
         master artisans sit cross-legged with needles finer than a strand of hair. 
-        They embroider patterns passed down through generations — each stitch a quiet 
-        act of devotion to a craft that has survived centuries.
+        They embroider patterns passed down through generations — each stitch part of 
+        a craft tradition that spans centuries.
       </p>
       <p class="story-text">
         We work directly with these artisans. No showrooms. No middlemen. No markups. 
@@ -1547,8 +1560,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
       <div class="story-tag">The Journey</div>
       <h2 class="story-title" style="font-size:clamp(28px,4vw,44px)">How Each Piece <em>Comes to Life</em></h2>
       <p style="opacity:0.6;max-width:500px;margin:0 auto;font-size:14px;line-height:1.7">
-        From raw fibre to your wardrobe — every product goes through a journey of authenticity, 
-        skill, and care before it reaches you.
+        Every piece moves from raw fibre to your wardrobe through skilled hands and quality checks.
       </p>
     </div>
 
@@ -1605,11 +1617,9 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
   <span>📦</span>
           </div>
         </div>
-        <h3>Delivered with Love</h3>
+        <h3>Packed and Shipped</h3>
         <p>
-          Every piece is hand-inspected, carefully folded, and packed in premium packaging. 
-          Shipped within <span id="deliveryDaysText">3–5</span> days with tracking. Delivered across India — 
-          from our hands to yours.
+          Hand-inspected, premium packaging. Shipped within <span id="deliveryDaysText">3–5</span> days with tracking. Delivered across India.
         </p>
       </div>
     </div>
@@ -1686,7 +1696,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
       <div class="promise-card">
         <div class="promise-icon">📦</div>
         <h3>Carefully Packed</h3>
-        <p>Hand inspected. Premium packaging. Every piece is treated like it's going to our own family.</p>
+        <p>Hand inspected and packed in premium packaging before dispatch.</p>
       </div>
       <div class="promise-card">
         <div class="promise-icon">🚚</div>
@@ -1707,7 +1717,7 @@ Authentic<br><em>Kashmiri</em><br>Craftsmanship
 <footer id="contact-footer">
 <div class="footer-brand">
 <div class="footer-brand-name">Kashmir <span>Weaves</span></div>
-<p>Direct from Srinagar. Authentic Kashmiri textiles — suits, shawls, and embroidered pieces shipped across India.</p>
+<p>Kashmir Weaves — Straight from artisan hands in Srinagar to your door. No middlemen. No showrooms.</p>
 <br>
 <p id="footerPhone">📱 +91 6006 496465</p>
 <p style="margin-top:6px" id="footerLocation">📍 Residency Road, Srinagar, J&K</p>
@@ -1765,8 +1775,13 @@ Order via WhatsApp
 <div class="admin-login-form">
 <div id="loginMsg"></div>
 <div class="form-group">
+<label>Admin Email</label>
+<input type="email" id="adminEmail" placeholder="admin@example.com" autocomplete="username">
+<span style="font-size:11px;opacity:0.4;margin-top:5px;display:block">Used when Supabase is configured. If not configured, only the password is checked locally.</span>
+</div>
+<div class="form-group">
 <label>Admin Password</label>
-<input type="password" id="adminPassword" placeholder="Enter password" onkeydown="if(event.key==='Enter')adminLogin()">
+<input type="password" id="adminPassword" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')adminLogin()">
 </div>
 <button class="submit-btn" onclick="adminLogin()">Login to Admin</button>
 
@@ -1778,6 +1793,7 @@ Order via WhatsApp
 <div class="modal-tabs">
 <button class="modal-tab active" onclick="switchTab('addProduct',this)">Add Product</button>
 <button class="modal-tab" onclick="switchTab('manageProducts',this)">Manage Products</button>
+<button class="modal-tab" onclick="switchTab('orders',this)">Orders</button>
 <button class="modal-tab" onclick="switchTab('categories',this)">Categories</button>
 <button class="modal-tab" onclick="switchTab('settings',this)">Settings</button>
 <button class="modal-tab" onclick="switchTab('aboutPage',this)">About Page</button>
@@ -1807,6 +1823,7 @@ Order via WhatsApp
 <option value="hand">Hand Embroidery</option>
 <option value="machine">Machine Work</option>
 <option value="hand machine">Both</option>
+<option value="plain">Plain</option>
 </select>
 </div>
 </div>
@@ -1846,6 +1863,14 @@ Order via WhatsApp
 <div class="tab-content" id="tab-manageProducts">
 <div class="admin-product-list" id="adminProductList"></div>
 </div><!-- /tab-manageProducts -->
+
+<!-- Tab: Orders -->
+<div class="tab-content" id="tab-orders">
+<div id="ordersMsg"></div>
+<p style="font-size:12px;opacity:0.5;margin-bottom:16px;line-height:1.7">Completed WhatsApp/Razorpay order snapshots are saved here with order number, customer details, cart items, payment info, and status.</p>
+<button class="submit-btn" onclick="loadAdminOrders()" style="margin-bottom:18px">Refresh Orders</button>
+<div class="admin-product-list" id="adminOrderList"></div>
+</div><!-- /tab-orders -->
 
 <!-- Tab: Categories -->
 <div class="tab-content" id="tab-categories">
@@ -2033,8 +2058,10 @@ function doGet(e) {
 </div>
 </div><!-- /checkoutModal -->
 
+
 <!-- ===== SCRIPTS ===== -->
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 
 // ============================================================
@@ -2096,6 +2123,22 @@ function handleImgError(img) {
   img.replaceWith(span);
 }
 
+// About-section image fallback. Keeps broken image fallback out of inline HTML
+// so emoji fallback text never leaks beside images.
+function handleAboutImgError(img) {
+  var emoji = img.dataset.emoji || '🧵';
+  var type = img.dataset.aboutType || '';
+  var parent = img.parentElement;
+  if (!parent) return;
+  parent.innerHTML = '';
+  parent.className = type === 'circle' ? 'craft-photo-placeholder' : 'story-photo-placeholder' + (type === 'tall' ? ' tall' : '');
+  parent.style.cssText = '';
+  var span = document.createElement('span');
+  span.style.fontSize = type === 'circle' ? '48px' : '64px';
+  span.textContent = emoji;
+  parent.appendChild(span);
+}
+
 // Toast notification
 function showToast(msg) {
   var t = document.getElementById('toast');
@@ -2119,8 +2162,8 @@ var SETTINGS = {
   location: 'Residency Road, Srinagar, J&K — 190001',
   razorpayKey: 'rzp_test_YourKeyHere',
   adminPasswordHash: simpleHash('admin123'),
-  googleSheetURL: 'https://script.google.com/macros/s/AKfycbz3pDmPWfbmRt5nMdxoUDJyVqqi-fbvB-HvFoJY6WWTRGxxyQ8utqeIg7xoymoqAHWD/exec',
-  sheetToken: 'jennie@123',
+  googleSheetURL: '',
+  sheetToken: 'change-this-secret-token',
   freeShippingMin: 2000,
   deliveryDays: '3–5',
   whatsappGreeting: 'Hi, I came across Kashmir Weaves and would love to explore your Kashmiri collection.',
@@ -2137,7 +2180,7 @@ var categories = [
 var products = [
   { id:1, name:'Sozni Jaal Shawl',      category:'shawl',    price:4500,  material:'100% Pashmina',                   work:'hand',    desc:'Fine Sozni needle work. Intricate floral jaal pattern.', badge:'hot',  emoji:'🧣', images:[], soldOut:false },
   { id:2, name:'Aari Work Suit',        category:'suit',     price:3200,  material:'Silk Cotton Blend',                work:'hand',    desc:'3-piece Kashmiri suit with dense Aari crewel embroidery.', badge:'new',  emoji:'👗', images:[], soldOut:false },
-  { id:3, name:'Pure Pashmina Wrap',    category:'pashmina', price:8500,  material:'100% Pashmina — GI Tagged',        work:'hand',    desc:'Plain weave pure Pashmina. Softest grade.',               badge:'pure', emoji:'🏔️', images:[], soldOut:false },
+  { id:3, name:'Pure Pashmina Wrap',    category:'pashmina', price:8500,  material:'100% Pashmina — GI Tagged',        work:'plain',   desc:'Plain weave pure Pashmina. Softest grade.',               badge:'pure', emoji:'🏔️', images:[], soldOut:false },
   { id:4, name:'Tilla Embroidery Shawl',category:'shawl',    price:2800,  material:'Wool Blend',                       work:'machine', desc:'Gold and silver Tilla embroidery on premium wool.',       badge:'',     emoji:'✨', images:[], soldOut:false },
   { id:5, name:'Kani Weave Shawl',      category:'pashmina', price:12000, material:'Pashmina-Silk Blend',              work:'hand',    desc:'Traditional Kani weave. Pattern woven into fabric.',      badge:'pure', emoji:'🎨', images:[], soldOut:false },
   { id:6, name:'Casual Kashmiri Suit',  category:'suit',     price:1800,  material:'Cotton Blend',                     work:'machine', desc:'Machine embroidered daily-wear suit.',                    badge:'new',  emoji:'👘', images:[], soldOut:false },
@@ -2149,6 +2192,21 @@ var cart = [];
 var nextId = 9;
 var adminLoggedIn = false;
 var currentFilter = 'all';
+
+// ============================================================
+//  SUPABASE DATABASE CONFIG
+//  Paste your values from Supabase → Project Settings → API.
+//  Keep the anon key here (safe for browsers). NEVER paste a service-role key.
+// ============================================================
+var SUPABASE_CONFIG = {
+  url: 'PASTE_SUPABASE_PROJECT_URL_HERE',
+  anonKey: 'PASTE_SUPABASE_ANON_KEY_HERE',
+  table: 'site_state',
+  rowId: 'main'
+};
+
+var supabaseClient = null;
+var supabaseLoaded = false;
 
 // About page image data — stores URLs or base64 for each slot
 var aboutImages = {
@@ -2171,10 +2229,52 @@ var aboutSlotConfig = [
 ];
 
 // ============================================================
-//  SECTION 3: SAVE & LOAD (localStorage persistence)
+//  SECTION 3: SAVE & LOAD (Supabase database + local fallback)
 // ============================================================
 
-function saveState() {
+function isSupabaseConfigured() {
+  return !!(SUPABASE_CONFIG &&
+    SUPABASE_CONFIG.url &&
+    SUPABASE_CONFIG.anonKey &&
+    SUPABASE_CONFIG.url.indexOf('PASTE_') !== 0 &&
+    SUPABASE_CONFIG.anonKey.indexOf('PASTE_') !== 0 &&
+    SUPABASE_CONFIG.url.indexOf('supabase.co') > -1);
+}
+
+function initSupabaseClient() {
+  if (!isSupabaseConfigured()) return null;
+  if (!window.supabase || !window.supabase.createClient) {
+    console.warn('Supabase library did not load. Local fallback will be used.');
+    return null;
+  }
+  if (!supabaseClient) {
+    supabaseClient = window.supabase.createClient(
+      SUPABASE_CONFIG.url,
+      SUPABASE_CONFIG.anonKey,
+      {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true
+        }
+      }
+    );
+  }
+  return supabaseClient;
+}
+
+function normaliseProducts(list) {
+  if (!Array.isArray(list)) return [];
+  list.forEach(function(prod) {
+    if (!prod.images) prod.images = prod.image ? [prod.image] : [];
+    delete prod.image;
+    prod.id = Number(prod.id);
+    prod.price = Number(prod.price) || 0;
+    prod.soldOut = !!prod.soldOut;
+  });
+  return list;
+}
+
+function saveLocalState() {
   try {
     localStorage.setItem('kw_products', JSON.stringify(products));
     localStorage.setItem('kw_cart', JSON.stringify(cart));
@@ -2186,7 +2286,7 @@ function saveState() {
     if (e.name === 'QuotaExceededError') {
       showToast('Storage full — use image URLs instead of uploads');
     }
-    console.warn('Save failed:', e);
+    console.warn('Local save failed:', e);
   }
 }
 
@@ -2198,24 +2298,102 @@ function loadState() {
     var cat = localStorage.getItem('kw_categories');
     var nid = localStorage.getItem('kw_nextId');
     var ai  = localStorage.getItem('kw_aboutImages');
-    if (p)   {
-      products = JSON.parse(p);
-      // Migrate old single image field to images array
-      products.forEach(function(prod) {
-        if (!prod.images) {
-          prod.images = prod.image ? [prod.image] : [];
-        }
-        delete prod.image;
-      });
-    }
+    if (p)   products   = normaliseProducts(JSON.parse(p));
     if (c)   cart       = JSON.parse(c);
     if (s)   SETTINGS   = { ...SETTINGS, ...JSON.parse(s) };
     if (cat) categories = JSON.parse(cat);
     if (nid) nextId     = parseInt(nid) || nextId;
-    if (ai) aboutImages = { ...aboutImages, ...JSON.parse(ai) };
+    if (ai)  aboutImages = { ...aboutImages, ...JSON.parse(ai) };
   } catch (e) {
-    console.warn('Load failed, using defaults:', e);
+    console.warn('Local load failed, using defaults:', e);
   }
+}
+
+function applyRemoteState(data) {
+  if (!data) return false;
+  if (data.settings && typeof data.settings === 'object') {
+    SETTINGS = { ...SETTINGS, ...data.settings };
+  }
+  if (Array.isArray(data.categories)) {
+    categories = data.categories;
+  }
+  if (Array.isArray(data.products)) {
+    products = normaliseProducts(data.products);
+  }
+  if (data.about_images && typeof data.about_images === 'object') {
+    aboutImages = { ...aboutImages, ...data.about_images };
+  }
+  if (data.next_id || data.nextId) {
+    nextId = parseInt(data.next_id || data.nextId) || nextId;
+  }
+  return true;
+}
+
+function buildRemotePayload() {
+  return {
+    id: SUPABASE_CONFIG.rowId || 'main',
+    settings: SETTINGS,
+    products: products,
+    categories: categories,
+    about_images: aboutImages,
+    next_id: nextId,
+    updated_at: new Date().toISOString()
+  };
+}
+
+async function loadSupabaseState() {
+  var client = initSupabaseClient();
+  if (!client) return false;
+
+  try {
+    var result = await client
+      .from(SUPABASE_CONFIG.table)
+      .select('settings,products,categories,about_images,next_id')
+      .eq('id', SUPABASE_CONFIG.rowId || 'main')
+      .maybeSingle();
+
+    if (result.error) throw result.error;
+
+    if (result.data) {
+      applyRemoteState(result.data);
+      saveLocalState(); // cache remote data for offline/fallback loading
+      supabaseLoaded = true;
+      console.log('Supabase site state loaded.');
+      return true;
+    }
+  } catch (e) {
+    console.warn('Supabase load failed. Using local/default data:', e.message || e);
+  }
+  return false;
+}
+
+async function saveSupabaseState() {
+  var client = initSupabaseClient();
+  if (!client) return { ok:false, skipped:true, reason:'Supabase not configured' };
+
+  // Only authenticated admins can write when RLS policies from supabase-setup.sql are applied.
+  var sessionResult = await client.auth.getSession();
+  var session = sessionResult && sessionResult.data ? sessionResult.data.session : null;
+  if (!session) return { ok:false, skipped:true, reason:'Not signed in' };
+
+  var result = await client
+    .from(SUPABASE_CONFIG.table)
+    .upsert(buildRemotePayload(), { onConflict: 'id' });
+
+  if (result.error) throw result.error;
+  return { ok:true };
+}
+
+function saveState() {
+  saveLocalState(); // always keep local cart/settings fallback
+
+  // Cart is intentionally NOT saved to Supabase; only site/admin data is shared.
+  // We fire-and-forget so Add to Cart stays instant for customers.
+  return saveSupabaseState().catch(function(e) {
+    console.warn('Supabase save failed:', e.message || e);
+    if (adminLoggedIn) showToast('Supabase save failed — check setup/RLS');
+    return { ok:false, error:e };
+  });
 }
 
 // ============================================================
@@ -2429,7 +2607,7 @@ function buildProductCard(p) {
     var mat       = sanitise(p.material);
     var desc      = sanitise(p.desc || '');
     var catLabel  = sanitise(getCategoryLabel(p.category));
-    var workLabel = (p.work || '').indexOf('hand') >= 0 ? 'Hand Work' : 'Machine Work';
+    var workLabel = p.work === 'plain' ? 'Plain' : p.work === 'hand machine' ? 'Hand & Machine' : (p.work || '').indexOf('hand') >= 0 ? 'Hand Work' : 'Machine Work';
     var pid       = p.id;
 
     var badgeHTML = '';
@@ -2588,7 +2766,7 @@ function updateCartUI() {
     cartFooter.style.display = 'none';
   } else {
     cartItemsEl.innerHTML = cart.map(function(item) {
-    var firstImg = (item.images && item.images.length > 0) ? item.images[0] : (item.image || '');
+      var firstImg = (item.images && item.images.length > 0) ? item.images[0] : (item.image || '');
       var url = sanitiseURL(firstImg);
       var em  = sanitise(item.emoji || '🧣');
       var pic = url
@@ -2651,13 +2829,15 @@ function submitToGoogleSheet(orderData) {
   fetch(SETTINGS.googleSheetURL, {
     method: 'POST',
     mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify(orderData)
   }).catch(function(err) { console.warn('Sheet log failed:', err); });
 }
 
-function logOrderToSheet(orderId, custName, custPhone, custEmail, custAddress, total, payMethod) {
-  var items = cart.map(function(i) { return i.name + ' x' + i.qty; }).join(', ');
+function logOrderToSheet(orderId, custName, custPhone, custEmail, custAddress, total, payMethod, source, paymentReference, status) {
+  var snapshot = getCartItemsSnapshot();
+  var items = snapshot.map(function(i) { return i.name + ' x' + i.qty + ' = ₹' + Number(i.subtotal || 0).toLocaleString('en-IN'); }).join(', ');
+  var itemCount = snapshot.reduce(function(sum, i) { return sum + (Number(i.qty) || 0); }, 0);
   var now   = new Date();
   var date  = now.toLocaleDateString('en-IN') + ' ' +
     now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
@@ -2669,10 +2849,186 @@ function logOrderToSheet(orderId, custName, custPhone, custEmail, custAddress, t
     email: custEmail || '—',
     address: custAddress,
     items: items,
+    itemsJson: JSON.stringify(snapshot),
+    itemCount: itemCount,
     total: '₹' + total.toLocaleString('en-IN'),
+    totalNumber: total,
     payment: payMethod,
-    status: 'New Order'
+    paymentReference: paymentReference || '',
+    source: source || 'website',
+    status: status || (source === 'razorpay' ? 'Paid' : 'New Order')
   });
+}
+
+// ============================================================
+//  SECTION 8B: SUPABASE ORDERS — order numbers + cart snapshots
+// ============================================================
+
+function pad2(n) { return String(n).padStart(2, '0'); }
+
+function generateOrderNumber() {
+  var d = new Date();
+  var stamp = d.getFullYear() + pad2(d.getMonth() + 1) + pad2(d.getDate()) + '-' +
+    pad2(d.getHours()) + pad2(d.getMinutes()) + pad2(d.getSeconds());
+  var rand = Math.random().toString(36).slice(2, 5).toUpperCase();
+  return 'KW' + stamp + '-' + rand;
+}
+
+function getCartItemsSnapshot() {
+  return cart.map(function(i) {
+    var firstImg = (i.images && i.images.length > 0) ? i.images[0] : (i.image || '');
+    // Avoid storing huge base64 images inside every order row.
+    var safeImg = firstImg && !String(firstImg).startsWith('data:') ? firstImg : '';
+    return {
+      product_id: i.id,
+      name: i.name,
+      price: Number(i.price) || 0,
+      qty: Number(i.qty) || 1,
+      subtotal: (Number(i.price) || 0) * (Number(i.qty) || 1),
+      emoji: i.emoji || '',
+      image: safeImg
+    };
+  });
+}
+
+function saveOrderToSupabase(orderData) {
+  var client = initSupabaseClient();
+  if (!client) return Promise.resolve({ ok:false, skipped:true, reason:'Supabase not configured' });
+
+  var row = {
+    order_number: orderData.order_number,
+    customer: orderData.customer || {},
+    items: orderData.items || [],
+    total: Number(orderData.total) || 0,
+    payment_method: orderData.payment_method || '',
+    payment_reference: orderData.payment_reference || '',
+    status: orderData.status || 'New Order',
+    source: orderData.source || 'website',
+    notes: orderData.notes || ''
+  };
+
+  return client.from('orders').insert(row).then(function(result) {
+    if (result.error) throw result.error;
+    return { ok:true };
+  }).catch(function(e) {
+    console.warn('Supabase order save failed:', e.message || e);
+    return { ok:false, error:e };
+  });
+}
+
+function loadAdminOrders() {
+  var list = document.getElementById('adminOrderList');
+  var msgEl = document.getElementById('ordersMsg');
+  if (!list) return;
+
+  if (!isSupabaseConfigured()) {
+    list.innerHTML = '<p style="opacity:0.4;text-align:center;padding:30px">Configure Supabase first to store orders.</p>';
+    return;
+  }
+
+  var client = initSupabaseClient();
+  if (!client) {
+    list.innerHTML = '<p style="opacity:0.4;text-align:center;padding:30px">Supabase library could not load.</p>';
+    return;
+  }
+
+  list.innerHTML = '<p style="opacity:0.45;text-align:center;padding:30px">Loading orders...</p>';
+  if (msgEl) msgEl.innerHTML = '';
+
+  client.auth.getSession().then(function(sessionResult) {
+    var session = sessionResult && sessionResult.data ? sessionResult.data.session : null;
+    if (!session) throw new Error('Please log in as admin first.');
+
+    return client
+      .from('orders')
+      .select('id,order_number,created_at,customer,items,total,payment_method,payment_reference,status,source,notes')
+      .order('created_at', { ascending:false })
+      .limit(75);
+  }).then(function(result) {
+    if (result.error) throw result.error;
+    var rows = result.data || [];
+    if (rows.length === 0) {
+      list.innerHTML = '<p style="opacity:0.4;text-align:center;padding:30px">No orders yet</p>';
+      return;
+    }
+
+    list.innerHTML = rows.map(function(o) {
+      var cust = o.customer || {};
+      var items = Array.isArray(o.items) ? o.items : [];
+      var itemLines = items.map(function(it) {
+        return '<div style="display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid rgba(245,240,232,0.06);padding:5px 0">' +
+          '<span>' + sanitise(it.name) + ' × ' + sanitise(it.qty) + '</span>' +
+          '<span style="color:var(--gold-light);white-space:nowrap">₹' + Number(it.subtotal || 0).toLocaleString('en-IN') + '</span>' +
+        '</div>';
+      }).join('');
+
+      var created = o.created_at ? new Date(o.created_at).toLocaleString('en-IN') : '';
+      var payment = sanitise(o.payment_method || '—') + (o.payment_reference ? '<br><span style="opacity:0.45">' + sanitise(o.payment_reference) + '</span>' : '');
+      var status = o.status || 'New Order';
+
+      return '<div class="admin-product-item">' +
+        '<div style="padding:16px;border-bottom:1px solid var(--border)">' +
+          '<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;margin-bottom:10px">' +
+            '<div>' +
+              '<strong style="font-family:Cormorant Garamond,serif;font-size:20px;color:var(--cream)">' + sanitise(o.order_number) + '</strong>' +
+              '<div style="font-size:11px;opacity:0.45;margin-top:3px">' + sanitise(created) + ' · ' + sanitise(o.source || 'website') + '</div>' +
+            '</div>' +
+            '<div style="text-align:right">' +
+              '<div style="color:var(--gold-light);font-size:19px">₹' + Number(o.total || 0).toLocaleString('en-IN') + '</div>' +
+              '<select onchange="updateOrderStatus(\'' + sanitise(o.id) + '\',this.value,\'' + sanitise(o.order_number) + '\')" style="margin-top:6px;background:rgba(245,240,232,0.06);border:1px solid var(--border);color:var(--cream);padding:6px 8px;font-family:Jost,sans-serif;font-size:12px">' +
+                ['New Order','Paid','Confirmed','Packed','Shipped','Delivered','Cancelled'].map(function(st) {
+                  return '<option value="' + st + '"' + (status === st ? ' selected' : '') + '>' + st + '</option>';
+                }).join('') +
+              '</select>' +
+            '</div>' +
+          '</div>' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:12px;line-height:1.65;margin-bottom:12px">' +
+            '<div style="opacity:0.75">' +
+              '<div><b>Customer:</b> ' + sanitise(cust.name || '—') + '</div>' +
+              '<div><b>Phone:</b> ' + sanitise(cust.phone || '—') + '</div>' +
+              '<div><b>Email:</b> ' + sanitise(cust.email || '—') + '</div>' +
+              '<div><b>Address:</b> ' + sanitise(cust.address || '—') + '</div>' +
+            '</div>' +
+            '<div style="opacity:0.75">' +
+              '<div><b>Payment:</b> ' + payment + '</div>' +
+              '<div><b>Status:</b> ' + sanitise(status) + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div style="background:rgba(245,240,232,0.035);border:1px solid rgba(245,240,232,0.08);padding:10px 12px;font-size:12px">' +
+            (itemLines || '<span style="opacity:0.4">No items saved</span>') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }).catch(function(e) {
+    list.innerHTML = '<p style="opacity:0.4;text-align:center;padding:30px">Could not load orders.</p>';
+    if (msgEl) msgEl.innerHTML = '<div class="admin-msg error">' + sanitise(e.message || e) + '</div>';
+  });
+}
+
+function updateOrderStatus(orderId, status, orderNumber) {
+  var client = initSupabaseClient();
+  if (!client) return;
+  client.from('orders')
+    .update({ status: status })
+    .eq('id', orderId)
+    .then(function(result) {
+      if (result.error) throw result.error;
+      // Optional: keep Google Sheet status in sync too, if Google Sheet is configured.
+      if (orderNumber) {
+        submitToGoogleSheet({
+          action: 'updateStatus',
+          orderId: orderNumber,
+          status: status,
+          statusUpdatedAt: new Date().toISOString()
+        });
+      }
+      showToast('Order status updated');
+    })
+    .catch(function(e) {
+      showToast('Status update failed');
+      console.warn('Order status update failed:', e.message || e);
+    });
 }
 
 // ============================================================
@@ -2685,7 +3041,8 @@ function orderWhatsApp() {
     return '• ' + i.name + ' x' + i.qty + ' = ₹' + (i.price * i.qty).toLocaleString('en-IN');
   }).join('\n');
   var total   = getCartTotal();
-  var orderId = 'KW' + Date.now().toString().slice(-6);
+  var orderId = generateOrderNumber();
+  var itemsSnapshot = getCartItemsSnapshot();
 
   var msg =
     'Hi ' + SETTINGS.shopName + '! I want to place an order:\n\n' +
@@ -2694,7 +3051,17 @@ function orderWhatsApp() {
     'Total: ₹' + total.toLocaleString('en-IN') + '\n\n' +
     'Please confirm availability.';
 
-  logOrderToSheet(orderId, 'WhatsApp Customer', '—', '—', 'Via WhatsApp', total, 'WhatsApp COD');
+  logOrderToSheet(orderId, 'WhatsApp Customer', '—', '—', 'Via WhatsApp', total, 'WhatsApp COD', 'whatsapp', '', 'New Order');
+  saveOrderToSupabase({
+    order_number: orderId,
+    customer: { name:'WhatsApp Customer', phone:'—', email:'—', address:'Via WhatsApp' },
+    items: itemsSnapshot,
+    total: total,
+    payment_method: 'WhatsApp COD',
+    payment_reference: '',
+    status: 'New Order',
+    source: 'whatsapp'
+  });
   openWhatsApp(SETTINGS.phone, msg);
 }
 
@@ -2765,13 +3132,25 @@ function payRazorpay() {
         showToast('Payment failed. Please try again.');
         return;
       }
-      var orderId = 'KW' + Date.now().toString().slice(-6);
+      var orderId = generateOrderNumber();
       var orderLines = cart.map(function(i) {
         return '• ' + i.name + ' x' + i.qty + ' = ₹' + (i.price * i.qty).toLocaleString('en-IN');
       }).join('\n');
 
+      var itemsSnapshot = getCartItemsSnapshot();
+
       logOrderToSheet(orderId, name, phone, email, address, total,
-        'Razorpay — ' + response.razorpay_payment_id);
+        'Razorpay — ' + response.razorpay_payment_id, 'razorpay', response.razorpay_payment_id, 'Paid');
+      saveOrderToSupabase({
+        order_number: orderId,
+        customer: { name:name, phone:phone, email:email, address:address },
+        items: itemsSnapshot,
+        total: total,
+        payment_method: 'Razorpay',
+        payment_reference: response.razorpay_payment_id,
+        status: 'Paid',
+        source: 'razorpay'
+      });
 
       var msg =
         '🛍️ *NEW ORDER #' + orderId + '*\n\n' +
@@ -2828,10 +3207,15 @@ function openAdmin() {
 
 function closeAdmin() {
   document.getElementById('adminModal').classList.remove('open');
+  if (adminLoggedIn && supabaseClient) {
+    supabaseClient.auth.signOut().catch(function(e) { console.warn('Supabase sign out failed:', e); });
+  }
   adminLoggedIn = false;
   document.getElementById('adminDashboard').style.display = 'none';
   document.getElementById('adminLoginSection').style.display = 'block';
   document.getElementById('adminPassword').value = '';
+  var emailEl = document.getElementById('adminEmail');
+  if (emailEl) emailEl.value = '';
   document.getElementById('loginMsg').innerHTML = '';
   var tabs = document.querySelectorAll('.modal-tab');
   var contents = document.querySelectorAll('.tab-content');
@@ -2839,14 +3223,43 @@ function closeAdmin() {
   contents.forEach(function(c, i) { c.classList.toggle('active', i === 0); });
 }
 
-function adminLogin() {
+async function adminLogin() {
   var pass = document.getElementById('adminPassword').value;
+  var msgEl = document.getElementById('loginMsg');
+
+  if (isSupabaseConfigured()) {
+    var emailEl = document.getElementById('adminEmail');
+    var email = emailEl ? emailEl.value.trim() : '';
+    if (!email || !pass) {
+      msgEl.innerHTML = '<div class="admin-msg error">Enter your Supabase admin email and password.</div>';
+      return;
+    }
+
+    var client = initSupabaseClient();
+    if (!client) {
+      msgEl.innerHTML = '<div class="admin-msg error">Supabase library could not load. Check internet/CDN.</div>';
+      return;
+    }
+
+    msgEl.innerHTML = '<div class="admin-msg" style="opacity:0.6">Signing in with Supabase...</div>';
+    try {
+      var result = await client.auth.signInWithPassword({ email: email, password: pass });
+      if (result.error) throw result.error;
+      adminLoggedIn = true;
+      msgEl.innerHTML = '';
+      showDashboard();
+    } catch (e) {
+      msgEl.innerHTML = '<div class="admin-msg error">Supabase login failed: ' + sanitise(e.message || 'Wrong email/password') + '</div>';
+    }
+    return;
+  }
+
+  // Local fallback for testing before Supabase is configured.
   if (simpleHash(pass) === SETTINGS.adminPasswordHash) {
     adminLoggedIn = true;
     showDashboard();
   } else {
-    document.getElementById('loginMsg').innerHTML =
-      '<div class="admin-msg error">Wrong password. Try again.</div>';
+    msgEl.innerHTML = '<div class="admin-msg error">Wrong password. Try again.</div>';
   }
 }
 
@@ -2867,6 +3280,7 @@ function switchTab(tabId, btn) {
   document.getElementById('tab-' + tabId).classList.add('active');
   btn.classList.add('active');
   if (tabId === 'manageProducts') loadAdminProducts();
+  if (tabId === 'orders')         loadAdminOrders();
   if (tabId === 'categories')     loadAdminCategories();
   if (tabId === 'addProduct') { populateCategoryDropdowns(); initAddImgSlots(); }
   if (tabId === 'aboutPage')      loadAboutImagesAdmin();
@@ -3101,9 +3515,10 @@ function loadAdminProducts() {
           '</div>' +
           '<div class="form-group"><label>Work Type</label>' +
             '<select id="e-work-' + p.id + '">' +
-              '<option value="hand"' + (p.work === 'hand' ? ' selected' : '') + '>Hand Embroidery</option>' +
-              '<option value="machine"' + (p.work === 'machine' ? ' selected' : '') + '>Machine Work</option>' +
+              '<option value="hand"'         + (p.work === 'hand'         ? ' selected' : '') + '>Hand Embroidery</option>' +
+              '<option value="machine"'      + (p.work === 'machine'      ? ' selected' : '') + '>Machine Work</option>' +
               '<option value="hand machine"' + (p.work === 'hand machine' ? ' selected' : '') + '>Both</option>' +
+              '<option value="plain"'        + (p.work === 'plain'        ? ' selected' : '') + '>Plain</option>' +
             '</select>' +
           '</div>' +
         '</div>' +
@@ -3323,7 +3738,7 @@ function loadSettingsForm() {
   document.getElementById('settingShopOpen').checked   = SETTINGS.shopOpen !== false;
 }
 
-function saveSettings() {
+async function saveSettings() {
   var shopName   = document.getElementById('settingShopName').value.trim();
   var location   = document.getElementById('settingLocation').value.trim();
   var phone      = document.getElementById('settingPhone').value.trim();
@@ -3391,6 +3806,7 @@ function saveSettings() {
 
   SETTINGS.shopOpen = document.getElementById('settingShopOpen').checked;
 
+
   if (newPass) {
     if (newPass.length < 4) {
       msgEl.innerHTML = '<div class="admin-msg error">Password must be at least 4 characters.</div>';
@@ -3400,12 +3816,21 @@ function saveSettings() {
     document.getElementById('settingPassword').value = '';
   }
 
-  saveState();
   applySettingsToPage();
   renderProducts(currentFilter); // refresh cart buttons if shopOpen changed
   var sheetStatus = sheetURL ? ' Google Sheet connected.' : '';
-  msgEl.innerHTML = '<div class="admin-msg success">Settings saved!' + sheetStatus + '</div>';
-  setTimeout(function() { msgEl.innerHTML = ''; }, 4000);
+  msgEl.innerHTML = '<div class="admin-msg" style="opacity:0.65">Saving settings...</div>';
+
+  try {
+    var saveResult = await saveState();
+    var dbStatus = isSupabaseConfigured()
+      ? (saveResult && saveResult.ok ? ' Supabase updated.' : ' Saved locally; Supabase was not updated.')
+      : ' Saved locally.';
+    msgEl.innerHTML = '<div class="admin-msg success">Settings saved!' + sheetStatus + dbStatus + '</div>';
+  } catch (e) {
+    msgEl.innerHTML = '<div class="admin-msg error">Settings saved locally, but Supabase failed: ' + sanitise(e.message || e) + '</div>';
+  }
+  setTimeout(function() { msgEl.innerHTML = ''; }, 5000);
 }
 
 function toggleSheetInstructions(btn) {
@@ -3548,7 +3973,7 @@ function loadAboutImagesAdmin() {
 
   container.innerHTML = aboutSlotConfig.map(function(slot) {
     var currentImg = aboutImages[slot.key] || '';
-    var hasImage   = currentImg ? true : false;
+    var hasImage   = !!currentImg;
     var isUrl      = currentImg.startsWith('http');
 
     var previewHtml = hasImage
@@ -3672,14 +4097,14 @@ function renderAboutImages() {
         el.style.cssText = 'width:140px;height:140px;margin:0 auto;overflow:hidden;border-radius:50%;border:1px solid var(--border);';
         el.innerHTML = '<img src="' + url + '" alt="' + sanitise(slot.label) + '" ' +
           'style="width:100%;height:100%;object-fit:cover" loading="lazy" ' +
-          'onerror="this.parentElement.innerHTML=\'<span style=font-size:48px>' + slot.emoji + '</span>\'">';
+          'data-emoji="' + sanitise(slot.emoji) + '" data-about-type="circle" onerror="handleAboutImgError(this)">';
       } else {
         var minH = slot.type === 'tall' ? '400px' : '360px';
         el.className = '';
         el.style.cssText = 'overflow:hidden;min-height:' + minH + ';';
         el.innerHTML = '<img src="' + url + '" alt="' + sanitise(slot.label) + '" ' +
           'style="width:100%;height:100%;min-height:' + minH + ';object-fit:cover;display:block" loading="lazy" ' +
-          'onerror="this.parentElement.innerHTML=\'<span style=font-size:64px>' + slot.emoji + '</span>\'">';
+          'data-emoji="' + sanitise(slot.emoji) + '" data-about-type="' + slot.type + '" onerror="handleAboutImgError(this)">';
       }
     } else {
       if (slot.type === 'circle') {
@@ -3787,18 +4212,24 @@ document.addEventListener('keydown', function(e) {
 //  SECTION 22: INIT — Runs when page loads (MUST BE LAST)
 // ============================================================
 
-loadState();
-applySettingsToPage();
-renderFilterBar();
-renderFooterLinks();
-renderProducts('all');
-renderAboutImages();
-updateCartUI();
-// Always start with admin closed — never auto-open
-adminLoggedIn = false;
-document.getElementById('adminModal').classList.remove('open');
-document.getElementById('adminDashboard').style.display = 'none';
-document.getElementById('adminLoginSection').style.display = 'block';
+async function initSite() {
+  loadState();              // local fallback first
+  await loadSupabaseState(); // shared database overrides local site data when configured
+
+  applySettingsToPage();
+  renderFilterBar();
+  renderFooterLinks();
+  renderProducts('all');
+  renderAboutImages();
+  updateCartUI();
+  // Always start with admin closed — never auto-open
+  adminLoggedIn = false;
+  document.getElementById('adminModal').classList.remove('open');
+  document.getElementById('adminDashboard').style.display = 'none';
+  document.getElementById('adminLoginSection').style.display = 'block';
+}
+
+initSite();
 
 // Recalculate carousel on resize
 window.addEventListener('resize', function() {
@@ -3809,5 +4240,6 @@ window.addEventListener('resize', function() {
   renderShowcaseDots();
 });
 </script>
-</body>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0c0731c4825a78c',t:'MTc4MTUxNDcxMA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
